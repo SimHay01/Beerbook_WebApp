@@ -10,48 +10,52 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <link rel="stylesheet" type="text/css" href="CSS/HomePage.css"></link>
-        <title>Beer - book</title>
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <title>Menu</title>
     </h:head>
     <h:body>
-
         <!-- Header part -->
-        <div class="bandeau" align="center">
-            <h1>BEER - BOOK
-                <img src="Images/logoHomePage.png" alt="LogoHome" 
-                     width="120" height="120" align="left"/>
-            </h1> 
-            <p> L'ENCYCLOPÉDIE DE MES BIÈRES PRÉFÉRÉES </p>
-        </div>
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">"
+                <a id="logo-container" href="#" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="Menu.xhtml">Menu</a></li>
+                    <li><a href="HomePage.xhtml">Accueil</a></li>
+                </ul>
+            </div>
+        </nav>
         <h:form>
-                      
+
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
             <p:panel header="Exprime-toi" style="margin-bottom:10px;">
-                
+
                 <h:panelGrid columns="4" cellpadding="5">
                     <p:outputLabel value="J'ai bu une " />
                     <p:selectOneMenu id="beers" value="#{postCtrl.post.idBi}">
-                            <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.pourcentBi}" itemLabel="#{bi.nomBi}"/>
-                        </p:selectOneMenu>
+                        <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.pourcentBi}" itemLabel="#{bi.nomBi}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value=" à " />
                     <p:selectOneMenu id="bars" value="#{postCtrl.post.idBa}">
-                            <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
-                        </p:selectOneMenu>                                        
+                        <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
+                    </p:selectOneMenu>                                        
                 </h:panelGrid>
-                
+
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel value="Je mets la note de " />
                     <p:rating value="#{postCtrl.post.noteBiereP}" stars="10" />  
                     <p:outputLabel value=" à cette bière." />
-                    
+
                     <p:outputLabel value="Je mets la note de " />
                     <p:rating value="#{postCtrl.post.noteBarP}" stars="10" />  
                     <p:outputLabel value=" à ce bar." />                    
                 </h:panelGrid>
-                
+
                 <h:panelGrid columns="1" cellpadding="5">
                     <p:outputLabel value="Ton avis sur cette dégustation : " />
                     <p:inputTextarea value="#{postCtrl.post.commentP}" rows="5" cols="30" counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false" />                                        
@@ -63,5 +67,11 @@ and open the template in the editor.
                 <p:commandButton value="Publier" action="#{postCtrl.addPost()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
             </p:panel>
         </h:form>        
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="JS/materialize.js"></script>
+        <script src="JS/init.js"></script>
+
     </h:body>
 </html>

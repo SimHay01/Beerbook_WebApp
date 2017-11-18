@@ -5,10 +5,23 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <link rel="stylesheet" type="text/css" href="CSS/HomePage.css"></link>
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <title>Inscription</title>
     </h:head>
     <h:body>
+        <!-- Header part -->
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">"
+                <a id="logo-container" href="#" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="HomePage.xhtml">Accueil</a></li>
+                </ul>
+            </div>
+        </nav>
+            
         <h:form>
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Inscription">
@@ -37,5 +50,11 @@
                 <p:commandButton value="Valider" action="#{utilCtrl.addUtil()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
             </p:panel>
         </h:form>        
+        
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="JS/materialize.js"></script>
+        <script src="JS/init.js"></script>
+        
     </h:body>
 </html>
