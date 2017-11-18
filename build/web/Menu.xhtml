@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu</title> 
+        <link rel="stylesheet" type="text/css" href="CSS/HomePage.css"></link>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+
+    <!-- Header part -->
+    <div class="bandeau" align="center">
+        <h1>BEER - BOOK
+            <img src="Images/logoHomePage.png" alt="LogoHome" 
+                 width="120" height="120" align="left"/>
+        </h1> 
+        <p> L'ENCYCLOPÉDIE DE MES BIÈRES PRÉFÉRÉES </p>
+    </div>
+    
+    <!-- Tag cloud part -->
+    <h:form>
+        <h:outputLabel value="#{utilCtrl.inputPseudo}" />
+    </h:form>
+    
+    <h:form> 
+        <p:growl id="msgs" showDetail="true" />
+        <p:tagCloud model="#{tagCloud.menu}" >
+            <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
+        </p:tagCloud>
+    </h:form>   
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="CSS/HomePage.css"></link>
+        <title>Beer - book</title>
+    </h:head>
+    <h:body>
+
+        <!-- Header part -->
+        <div class="bandeau" align="center">
+            <h1>BEER - BOOK
+                <img src="Images/logoHomePage.png" alt="LogoHome" 
+                     width="120" height="120" align="left"/>
+            </h1> 
+            <p> L'ENCYCLOPÉDIE DE MES BIÈRES PRÉFÉRÉES </p>
+        </div>
+        <h:form>
+                      
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+            <p:panel header="Exprime-toi" style="margin-bottom:10px;">
+                
+                <h:panelGrid columns="4" cellpadding="5">
+                    <p:outputLabel value="J'ai bu une " />
+                    <p:selectOneMenu id="beers" value="#{postCtrl.post.idBi}">
+                            <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.pourcentBi}" itemLabel="#{bi.nomBi}"/>
+                        </p:selectOneMenu>
+                    <p:outputLabel value=" à " />
+                    <p:selectOneMenu id="bars" value="#{postCtrl.post.idBa}">
+                            <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
+                        </p:selectOneMenu>                                        
+                </h:panelGrid>
+                
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel value="Je mets la note de " />
+                    <p:rating value="#{postCtrl.post.noteBiereP}" stars="10" />  
+                    <p:outputLabel value=" à cette bière." />
+                    
+                    <p:outputLabel value="Je mets la note de " />
+                    <p:rating value="#{postCtrl.post.noteBarP}" stars="10" />  
+                    <p:outputLabel value=" à ce bar." />                    
+                </h:panelGrid>
+                
+                <h:panelGrid columns="1" cellpadding="5">
+                    <p:outputLabel value="Ton avis sur cette dégustation : " />
+                    <p:inputTextarea value="#{postCtrl.post.commentP}" rows="5" cols="30" counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false" />                                        
+                    <h:outputText id="carac_restant" />
+                </h:panelGrid>                 
+
+                <p:separator />
+
+                <p:commandButton value="Publier" action="#{postCtrl.addPost()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+            </p:panel>
+        </h:form>        
+    </h:body>
+</html>

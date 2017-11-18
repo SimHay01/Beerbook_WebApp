@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="CSS/HomePage.css"></link>
+        <title>Inscription</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:panel header="Inscription">
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h:outputLabel for="pseudo" value="Pseudo :" />
+                    <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}" label="Pseudo" required="true">
+                         <f:validateLength minimum="4" maximum="20" />
+                    </p:inputText>                                       
+                    <p:message for="pseudo" />                  
+                    
+                    <h:outputLabel for="mdp1" value="Mot de passe :" />
+                    <p:password id="mdp1" value="#{utilCtrl.util.mdpU}" match="mdp2" label="Mot de passe" required="true" />
+                    <p:message for="mdp1" />
+
+                    <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                    <p:password id="mdp2" value="#{utilCtrl.util.mdpU}" label="Confirmation mot de passe" required="true" />
+                    <p:message for="mdp2" />
+                                        
+                    <!--<h:outputLabel for="pp" value="Photo de profil :" />                    
+                    <p:fileUpload fileUploadListener="" mode="advanced" dragDropSupport="true"
+                        update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:growl id="messages" showDetail="true" />-->
+                   
+                </h:panelGrid>
+                <p:separator/>
+                <p:commandButton value="Valider" action="#{utilCtrl.addUtil()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+            </p:panel>
+        </h:form>        
+    </h:body>
+</html>
