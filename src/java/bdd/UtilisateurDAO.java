@@ -35,6 +35,13 @@ public class UtilisateurDAO {
                 .setParameter("inputMdpParam", inputMdp);
         return query.getResultList();
     }   
+    
+    
+    public void updateUtilisateur(Utilisateur utilisateur){
+        Utilisateur u = em.merge(utilisateur);
+        em.persist(u);
+        em.flush();
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

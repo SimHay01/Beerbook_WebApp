@@ -83,6 +83,9 @@ public class UtilisateurCtrl implements Serializable {
         this.util = util;
     }
     
+    public void updateUtilisateur() {
+        daoUtil.updateUtilisateur(util);
+    }
     
     
     

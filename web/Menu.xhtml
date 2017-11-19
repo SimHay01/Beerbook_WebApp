@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -11,27 +12,22 @@
         <title>Menu</title>
     </h:head>
     <h:body>
-        <!-- Header part -->
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container">"
-                <a id="logo-container" href="#" class="brand-logo">Logo</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="HomePage.xhtml">Accueil</a></li>
-                </ul>
-            </div>
-        </nav>
+        <!-- Call the header -->
+        <ui:include src="Header/HeaderAccueil.xhtml"/>
 
         <!-- Tag cloud part -->
-        <h:form>
-            <h:outputLabel value="#{utilCtrl.inputPseudo}" />
-        </h:form>
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <h:outputLabel value="Bienvenu #{utilCtrl.inputPseudo} !" class="col offset-s6 "/> <br/>
 
-        <h:form> 
-            <p:growl id="msgs" showDetail="true" />
-            <p:tagCloud model="#{tagCloud.menu}" >
-                <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
-            </p:tagCloud>
-        </h:form>   
+                    <p:growl id="msgs" showDetail="true" />
+                    <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3 ">
+                        <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
+                    </p:tagCloud>
+                </div>
+            </div>
+        </div>
 
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
