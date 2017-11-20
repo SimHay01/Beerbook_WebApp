@@ -25,7 +25,7 @@
                     <h:outputText value="Si tu souhaites découvrir une bière, ajoute-là à ta 'To drink list' ! Celle-ci est disponible dans 'À découvrir'." />
                 </h:panelGrid>
                 <p:separator />
-                
+
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:dataTable var="bi" value="#{biereCtrl.allBeers}" widgetVar="beersTable"
@@ -47,7 +47,7 @@
                                 <f:convertNumber type="number"/>
                             </h:outputText>
                         </p:column>
-                        
+
                         <p:column filterBy="#{bi.typeBi}" headerText="Type de bière" filterMatchMode="contains">
                             <h:outputText value="#{bi.typeBi}" />
                         </p:column>
@@ -55,13 +55,13 @@
                         <p:column filterBy="#{bi.paysBi}" headerText="Pays de fabrication" filterMatchMode="contains">
                             <h:outputText value="#{bi.paysBi}" />
                         </p:column>
-                        
+
                         <p:column style="width:32px;text-align: center">
                             <p:commandButton action="#{decouvrirBiCtrl.addBiere(bi, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
                         </p:column>                                                
                     </p:dataTable>
                 </h:form>
-                                  
+
             </p:tab>
             <p:tab title="Les bars">
                 <h:panelGrid columns="1" cellpadding="5">
@@ -70,7 +70,7 @@
                     <h:outputText value="Si tu souhaites découvrir un bar, ajoute-le à ta 'Pub List' ! Celle-ci est disponible dans 'À découvrir'." />
                 </h:panelGrid>
                 <p:separator />
-                
+
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:dataTable var="ba" value="#{barCtrl.allBars}" widgetVar="barsTable"
@@ -90,11 +90,11 @@
                         <p:column filterBy="#{ba.villeBa}" headerText="Ville dans laquelle est située le bar" filterMatchMode="contains">
                             <h:outputText value="#{ba.villeBa}" />
                         </p:column>
-                        
+
                         <p:column filterBy="#{ba.paysBa}" headerText="Pays dans lequel est situé le bar" filterMatchMode="contains">
                             <h:outputText value="#{ba.paysBa}" />
                         </p:column>
-                        
+
                         <p:column style="width:32px;text-align: center">
                             <p:commandButton action="#{decouvrirBaCtrl.addBar(ba, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
                         </p:column>                                                
@@ -104,7 +104,7 @@
         </p:tabView>        
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
     </h:body>
