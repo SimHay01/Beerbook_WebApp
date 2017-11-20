@@ -28,6 +28,18 @@
                 </div>
             </div>
         </div>
+        <!-- Popup part -->
+        <h:panelGrid columns="1" cellpadding="5" style="text-align: center" class="col s12 centered" >
+            <p:commandButton value="Qui sont les auteurs de ce site sublime ?" class="btn-large waves-effect waves-light teal lighten"
+                              onclick="PF('carlitoSimonDialog').show();"/>
+        </h:panelGrid>
+        <p:dialog header="Promo GPhy 2018" widgetVar="carlitoSimonDialog" minHeight="40" resizable="false" closeOnEscape="true">
+            <img src="Images/Carlito.JPG" width="120" height="120" align="left" style="margin-right: 2px"/>
+            <img src="Images/Sim.JPG" width="120" height="120" align="right"/>
+            <br>
+                <h:outputText value="M2 GPhy" />
+            </br>
+        </p:dialog>                
 
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
