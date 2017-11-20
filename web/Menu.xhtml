@@ -15,19 +15,27 @@
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueil.xhtml"/>
 
+
         <!-- Tag cloud part -->
         <div class="container">
             <div class="section">
                 <div class="row">
-                    <h:outputLabel value="Bienvenue #{utilCtrl.util.pseudoU} !" class="col offset-s6 "/> <br/>
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="center">
+                                <h:outputLabel value="Bienvenue #{utilCtrl.util.pseudoU} !" style="text-transform: uppercase; color: black" />
+                            </div>
 
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3 ">
-                        <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
-                    </p:tagCloud>
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3">
+                                <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
+                            </p:tagCloud>
+                            <img src="Images/backgroundMenu.jpg" class="responsive-img"/>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>               
+        </div>
 
         <!--  Scripts-->
         <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->

@@ -17,91 +17,95 @@
         <ui:include src="Header/HeaderAccueilMenu.xhtml"/>
 
 
-        <p:tabView>
-            <p:tab title="Les bières">
-                <h:panelGrid columns="1" cellpadding="5">
-                    <h:outputText value="Tu peux retrouver ici toutes les bières de la communauté Beerbook."/>
-                    <h:outputText value="Utilise les filtres pour retrouver une bière rapidement !"/>                    
-                    <h:outputText value="Si tu souhaites découvrir une bière, ajoute-là à ta 'To drink list' ! Celle-ci est disponible dans 'À découvrir'." />
-                </h:panelGrid>
-                <p:separator />
+        <div class="container">
+            <div class="section">
+                <p:tabView>
+                    <p:tab title="Les bières">
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <h:outputText value="Tu peux retrouver ici toutes les bières de la communauté Beerbook."/>
+                            <h:outputText value="Utilise les filtres pour retrouver une bière rapidement !"/>                    
+                            <h:outputText value="Si tu souhaites découvrir une bière, ajoute-là à ta 'To drink list' ! Celle-ci est disponible dans 'À découvrir'." />
+                        </h:panelGrid>
+                        <p:separator />
 
-                <h:form>
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:dataTable var="bi" value="#{biereCtrl.allBeers}" widgetVar="beersTable"
-                                 emptyMessage="Aucune bière trouvée avec ces critères" filteredValue="#{biereCtrl.filteredBeers}">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:dataTable var="bi" value="#{biereCtrl.allBeers}" widgetVar="beersTable"
+                                         emptyMessage="Aucune bière trouvée avec ces critères" filteredValue="#{biereCtrl.filteredBeers}">
 
-                        <f:facet name="header">
-                            <p:outputPanel>
-                                <h:outputText value="Recherche avec tous les champs : " />
-                                <p:inputText id="globalFilter" onkeyup="PF('beersTable').filter()" style="width:150px" placeholder="Entre un mot clé"/>
-                            </p:outputPanel>
-                        </f:facet>
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Recherche avec tous les champs : " />
+                                        <p:inputText id="globalFilter" onkeyup="PF('beersTable').filter()" style="width:150px" placeholder="Entre un mot clé"/>
+                                    </p:outputPanel>
+                                </f:facet>
 
-                        <p:column filterBy="#{bi.nomBi}" headerText="Nom" filterMatchMode="contains">
-                            <h:outputText value="#{bi.nomBi}" />
-                        </p:column>
+                                <p:column filterBy="#{bi.nomBi}" headerText="Nom" filterMatchMode="contains">
+                                    <h:outputText value="#{bi.nomBi}" />
+                                </p:column>
 
-                        <p:column filterBy="#{bi.pourcentBi}" headerText="Pourcentage d'alcool" filterFunction="#{biereCtrl.filterByPercent}">
-                            <h:outputText value="#{bi.pourcentBi}">
-                                <f:convertNumber type="number"/>
-                            </h:outputText>
-                        </p:column>
+                                <p:column filterBy="#{bi.pourcentBi}" headerText="Pourcentage d'alcool" filterFunction="#{biereCtrl.filterByPercent}">
+                                    <h:outputText value="#{bi.pourcentBi}">
+                                        <f:convertNumber type="number"/>
+                                    </h:outputText>
+                                </p:column>
 
-                        <p:column filterBy="#{bi.typeBi}" headerText="Type de bière" filterMatchMode="contains">
-                            <h:outputText value="#{bi.typeBi}" />
-                        </p:column>
+                                <p:column filterBy="#{bi.typeBi}" headerText="Type de bière" filterMatchMode="contains">
+                                    <h:outputText value="#{bi.typeBi}" />
+                                </p:column>
 
-                        <p:column filterBy="#{bi.paysBi}" headerText="Pays de fabrication" filterMatchMode="contains">
-                            <h:outputText value="#{bi.paysBi}" />
-                        </p:column>
+                                <p:column filterBy="#{bi.paysBi}" headerText="Pays de fabrication" filterMatchMode="contains">
+                                    <h:outputText value="#{bi.paysBi}" />
+                                </p:column>
 
-                        <p:column style="width:32px;text-align: center">
-                            <p:commandButton action="#{decouvrirBiCtrl.addBiere(bi, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
-                        </p:column>                                                
-                    </p:dataTable>
-                </h:form>
+                                <p:column headerText="Cliquer pour ajouter" style="width:150px;text-align: center">
+                                    <p:commandButton action="#{decouvrirBiCtrl.addBiere(bi, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
+                                </p:column>                                                
+                            </p:dataTable>
+                        </h:form>
 
-            </p:tab>
-            <p:tab title="Les bars">
-                <h:panelGrid columns="1" cellpadding="5">
-                    <h:outputText value="Tu peux retrouver ici tous les bars de la communauté Beerbook."/>
-                    <h:outputText value="Utilise les filtres pour retrouver un bar rapidement !"/>                    
-                    <h:outputText value="Si tu souhaites découvrir un bar, ajoute-le à ta 'Pub List' ! Celle-ci est disponible dans 'À découvrir'." />
-                </h:panelGrid>
-                <p:separator />
+                    </p:tab>
+                    <p:tab title="Les bars">
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <h:outputText value="Tu peux retrouver ici tous les bars de la communauté Beerbook."/>
+                            <h:outputText value="Utilise les filtres pour retrouver un bar rapidement !"/>                    
+                            <h:outputText value="Si tu souhaites découvrir un bar, ajoute-le à ta 'Pub List' ! Celle-ci est disponible dans 'À découvrir'." />
+                        </h:panelGrid>
+                        <p:separator />
 
-                <h:form>
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:dataTable var="ba" value="#{barCtrl.allBars}" widgetVar="barsTable"
-                                 emptyMessage="Aucun bar trouvé avec ces critères" filteredValue="#{barCtrl.filteredBars}">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:dataTable var="ba" value="#{barCtrl.allBars}" widgetVar="barsTable"
+                                         emptyMessage="Aucun bar trouvé avec ces critères" filteredValue="#{barCtrl.filteredBars}">
 
-                        <f:facet name="header">
-                            <p:outputPanel>
-                                <h:outputText value="Recherche avec tous les champs : " />
-                                <p:inputText id="globalFilter" onkeyup="PF('barsTable').filter()" style="width:150px" placeholder="Entre un mot clé"/>
-                            </p:outputPanel>
-                        </f:facet>
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Recherche avec tous les champs : " />
+                                        <p:inputText id="globalFilter" onkeyup="PF('barsTable').filter()" style="width:150px" placeholder="Entre un mot clé"/>
+                                    </p:outputPanel>
+                                </f:facet>
 
-                        <p:column filterBy="#{ba.nomBa}" headerText="Nom" filterMatchMode="contains">
-                            <h:outputText value="#{ba.nomBa}" />
-                        </p:column>
+                                <p:column filterBy="#{ba.nomBa}" headerText="Nom" filterMatchMode="contains">
+                                    <h:outputText value="#{ba.nomBa}" />
+                                </p:column>
 
-                        <p:column filterBy="#{ba.villeBa}" headerText="Ville dans laquelle est située le bar" filterMatchMode="contains">
-                            <h:outputText value="#{ba.villeBa}" />
-                        </p:column>
+                                <p:column filterBy="#{ba.villeBa}" headerText="Ville dans laquelle est située le bar" filterMatchMode="contains">
+                                    <h:outputText value="#{ba.villeBa}" />
+                                </p:column>
 
-                        <p:column filterBy="#{ba.paysBa}" headerText="Pays dans lequel est situé le bar" filterMatchMode="contains">
-                            <h:outputText value="#{ba.paysBa}" />
-                        </p:column>
+                                <p:column filterBy="#{ba.paysBa}" headerText="Pays dans lequel est situé le bar" filterMatchMode="contains">
+                                    <h:outputText value="#{ba.paysBa}" />
+                                </p:column>
 
-                        <p:column style="width:32px;text-align: center">
-                            <p:commandButton action="#{decouvrirBaCtrl.addBar(ba, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
-                        </p:column>                                                
-                    </p:dataTable>
-                </h:form>
-            </p:tab>
-        </p:tabView>        
+                                <p:column headerText="Cliquer pour ajouter" style="width:150px;text-align: center">
+                                    <p:commandButton action="#{decouvrirBaCtrl.addBar(ba, utilCtrl.util)}" ajax="false" icon="ui-icon-plus" validateClient="true"/>
+                                </p:column>                                                
+                            </p:dataTable>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>    
+            </div>
+        </div>
 
         <!--  Scripts-->
         <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
