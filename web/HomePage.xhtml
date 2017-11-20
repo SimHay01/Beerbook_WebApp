@@ -8,13 +8,13 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <title>Beer - book</title>
+        <title>Accueil</title>
     </h:head>
     <h:body>
         <!-- Header part -->
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">"
-                <a id="logo-container" href="#" class="brand-logo">Logo</a>
+                <a id="logo-container" class="brand-logo">BEER - BOOK</a>
                 <ul class="right hide-on-med-and-down"></ul>
             </div>
         </nav>
@@ -122,10 +122,14 @@
                                          class="btn-large waves-effect waves-light teal lighten" onclick="PF('dialog').show();"/>
                     </h:panelGrid>
                     <p:dialog widgetVar="dialog" minHeight="40" resizable="false" closeOnEscape="true">
-                        <img src="Images/Carlito.JPG" width="120" height="120" align="left" style="margin-right: 2px"/>
-                        <img src="Images/Sim.JPG" width="120" height="120" align="right"/>
+                        <img src="Images/Carlito.JPG" width="140" height="140" align="left" style="margin-right: 2px" class="circle"/>
+                        <img src="Images/Sim.JPG" width="140" height="140" align="right" class="circle"/>
                         <br>
-                            <h:outputText value="M2 GPhy" />
+                            <div class="container">
+                                <div class="center">
+                                    <h:outputText value="M2 GPhy"/>
+                                </div>
+                            </div>
                         </br>
                     </p:dialog>
                 </div>
