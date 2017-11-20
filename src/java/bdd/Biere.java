@@ -36,6 +36,9 @@ import javax.validation.constraints.Size;
 public class Biere implements Serializable {
 
     @OneToMany(mappedBy = "idBi")
+    private Collection<Decouvrirbiere> decouvrirbiereCollection;
+
+    @OneToMany(mappedBy = "idBi")
     private Collection<Post> postCollection;
 
     private static final long serialVersionUID = 1L;
@@ -145,6 +148,14 @@ public class Biere implements Serializable {
 
     public void setPostCollection(Collection<Post> postCollection) {
         this.postCollection = postCollection;
+    }
+
+    public Collection<Decouvrirbiere> getDecouvrirbiereCollection() {
+        return decouvrirbiereCollection;
+    }
+
+    public void setDecouvrirbiereCollection(Collection<Decouvrirbiere> decouvrirbiereCollection) {
+        this.decouvrirbiereCollection = decouvrirbiereCollection;
     }
     
 }

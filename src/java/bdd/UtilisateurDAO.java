@@ -26,7 +26,6 @@ public class UtilisateurDAO {
         em.flush();
     } 
     
-    //CHANGER METTTRE L'objet utilisateur au lieu de juste l'ID
     public List<Utilisateur> checkConnexion(String inputPseudo, String inputMdp){
         Query query;
         query = em.createQuery(
@@ -34,15 +33,24 @@ public class UtilisateurDAO {
                 .setParameter("inputPseudoParam", inputPseudo)
                 .setParameter("inputMdpParam", inputMdp);
         return query.getResultList();
-    }   
-    
-    
-    public void updateUtilisateur(Utilisateur utilisateur){
-        Utilisateur u = em.merge(utilisateur);
-        em.persist(u);
-        em.flush();
     }
-
+    
+    public void updatePseudo(String newPseudo, Integer idConnectedUser) {
+        Query queryUpdatePseudo = em.createQuery(
+                "UPDATE Utilisateur u SET u.pseudoU = :newPseudo WHERE u.idU = :idConnectedUser")
+                .setParameter("newPseudo", newPseudo)
+                .setParameter("idConnectedUser", idConnectedUser);
+        queryUpdatePseudo.executeUpdate();
+    } 
+    
+    public void updateMdp(String newMdp, Integer idConnectedUser) {
+        Query queryUpdateMdp = em.createQuery(
+                "UPDATE Utilisateur u SET u.mdpU = :newMdp WHERE u.idU = :idConnectedUser")
+                .setParameter("newMdp", newMdp)
+                .setParameter("idConnectedUser", idConnectedUser);
+        queryUpdateMdp.executeUpdate();
+    }     
+    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

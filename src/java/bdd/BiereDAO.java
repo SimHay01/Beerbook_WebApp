@@ -24,7 +24,22 @@ public class BiereDAO {
     public List<Biere> allBeers(){
         Query query = em.createNamedQuery("Biere.findAll");
         return query.getResultList();
+    }
+    
+    public List<String> allTypes(){
+        Query queryTypes = em.createQuery("SELECT DISTINCT b.typeBi FROM Biere b");
+        return queryTypes.getResultList();
+    }
+    
+    public List<String> allCountries(){
+        Query queryTypes = em.createQuery("SELECT DISTINCT b.paysBi FROM Biere b");
+        return queryTypes.getResultList();
     }    
+    
+    public void add(Biere b){
+        em.persist(b);
+        em.flush();
+    }     
 
 
 }

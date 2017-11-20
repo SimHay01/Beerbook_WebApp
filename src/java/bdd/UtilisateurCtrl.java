@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -24,13 +25,16 @@ public class UtilisateurCtrl implements Serializable {
     private UtilisateurDAO daoUtil;
     private Utilisateur util;
     
-    private String inputPseudo, inputMdp;
+    private String inputPseudo;
+    private String inputMdp;
+    
+    private UploadedFile pic;
     
     /**
      * Creates a new instance of BiereCtrl
      */
     public UtilisateurCtrl() {
-        //this.util = new Utilisateur();
+        this.util = new Utilisateur();
     }    
     
     public void addUtil(){
@@ -39,15 +43,47 @@ public class UtilisateurCtrl implements Serializable {
         this.util = new Utilisateur();
     }
     
+    public void updatePseudo(){
+        daoUtil.updatePseudo(inputPseudo, util.getIdU());
+        util.setPseudoU(inputPseudo);
+        setInputPseudo("");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Sympa comme nouveau pseudo !"));        
+    }
+    
+    public void updateMdp(){
+        daoUtil.updateMdp(inputMdp, util.getIdU());
+        util.setMdpU(inputMdp);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Ton mot de passe a été modifié."));        
+    }    
+    
     public String checkConnexion(){
-        this.util = new Utilisateur();        
         if(daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size() == 1) {
-            return "Menu";
+            setUtil(daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).get(0));
+            daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).clear();
+            setInputPseudo("");
+            return "Menu";            
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Pseudo ou mot de passe incorrect(s)."));        
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));        
         }
         return null;
     }
+    
+    public void uploadPic() {
+        if(pic != null) {
+            FacesMessage message = new FacesMessage("Succesful", pic.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }  
+
+    public UploadedFile getPic() {
+        return pic;
+    }
+
+    public void setPic(UploadedFile pic) {
+        this.pic = pic;
+    }
+    
+    
 
     public void setInputPseudo(String inputPseudo) {
         this.inputPseudo = inputPseudo;
@@ -81,12 +117,5 @@ public class UtilisateurCtrl implements Serializable {
 
     public void setUtil(Utilisateur util) {
         this.util = util;
-    }
-    
-    public void updateUtilisateur() {
-        daoUtil.updateUtilisateur(util);
-    }
-    
-    
-    
+    }    
 }

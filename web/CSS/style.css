@@ -6,6 +6,15 @@
  * Made By MaterializeCSS.com
  */
 
+
+.ui-widget-content {
+    border:none
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+    border:none    
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;

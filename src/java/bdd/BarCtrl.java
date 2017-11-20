@@ -10,6 +10,8 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -23,6 +25,9 @@ public class BarCtrl implements Serializable {
     @EJB
     private BarDAO daoBar;
     private Bar bar;
+    
+    private List<Biere> filteredBars;
+    private Biere selectedBar;    
             
     /**
      * Creates a new instance of BiereCtrl
@@ -33,8 +38,32 @@ public class BarCtrl implements Serializable {
     
     public List<Bar> getAllBars(){
         return daoBar.allBars();
-    }  
+    }
 
+    public void addBar(){
+        daoBar.add(this.bar);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bar.getNomBa()+ " !", "La communauté Beerbook te remercie pour cet ajout !"));
+        this.bar = new Bar();
+    }    
+
+    public List<Biere> getFilteredBars() {
+        return filteredBars;
+    }
+
+    public void setFilteredBars(List<Biere> filteredBars) {
+        this.filteredBars = filteredBars;
+    }
+
+    public Biere getSelectedBar() {
+        return selectedBar;
+    }
+
+    public void setSelectedBar(Biere selectedBar) {
+        this.selectedBar = selectedBar;
+    }
+
+    
+    
     public BarDAO getDaoBar() {
         return daoBar;
     }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -15,30 +16,39 @@
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueilMenu.xhtml"/>
 
-        <div class="container">
-            <div class="section">
-                <div class="row">
-                    <h1 align="center" class="header center teal-text text-lighten-2">Mon profil</h1>
-                </div>
-            </div>
-        </div>
+        <h:outputLabel value="#{utilCtrl.util.pseudoU}" />
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+        <p:panel header="Voici ton profil" style="margin-bottom:10px;">
+            <h:form>
+                <h:panelGrid columns="1" cellpadding="5">
+                    <p:outputLabel value="Modifier photo ici" />
+                </h:panelGrid>
+                <p:separator />
 
-        <!-- Finir l'update du profil-->
-        <div class="container">
-            <div class="center">
-                <h:form>
-                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-2" layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="pseudo" value="Pseudo :" class="header center teal-text text-lighten-2" />
-                        <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}"/>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel id="pseudo" value="Modifie ton pseudo : " />
+                    <p:inputText value="#{utilCtrl.inputPseudo}">
+                        <f:validateLength minimum="4" maximum="20" />
+                    </p:inputText>
+                    <p:message for="pseudo" />
+                </h:panelGrid>
+                <p:commandButton id="updatePseudo" value="Mets à jour ton pseudo" actionListener="#{utilCtrl.updatePseudo()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                <p:separator />
+            </h:form>
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h:outputLabel for="mdp1" value="Mot de passe :" />
+                    <p:password id="mdp1" value="#{utilCtrl.inputMdp}" match="mdp2" label="Mot de passe" required="true" />
+                    <p:message for="mdp1" />
 
-                        <p:outputLabel for="password" value="Mot de passe" class="header center teal-text text-lighten-2"/>
-                        <p:password id="password" value="#{utilCtrl.util.mdpU}"/>
-                    </p:panelGrid>
-
-                    <p:commandButton value="Mettre à jour" class="btn-large waves-effect waves-light teal lighten" onclick="#{utilCtrl.updateUtilisateur()}" ajax="false"/>
-                </h:form>
-            </div>
-        </div>
+                    <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                    <p:password id="mdp2" value="#{utilCtrl.inputMdp}" label="Confirmation mot de passe" required="true" />
+                    <p:message for="mdp2" />
+                </h:panelGrid>
+                <p:commandButton id="updateMdp" value="Mets à jour ton mot de passe" actionListener="#{utilCtrl.updateMdp()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                <p:separator />
+            </h:form>
+        </p:panel>
 
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

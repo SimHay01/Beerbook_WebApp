@@ -38,8 +38,8 @@ public class PostCtrl implements Serializable {
     public PostCtrl() {
         this.post = new Post();
     }
-
-    public void addPost(){        
+    
+    public void addPost(){
         new SimpleDateFormat("yyyy-MM-dd").format(this.post.setDateP());
         this.post.setIdU(this.daoUtil.checkConnexion(util.getPseudoU(), util.getMdpU()).get(0));        
         daoPost.addPost(this.post);
@@ -50,7 +50,7 @@ public class PostCtrl implements Serializable {
     public List<Post> getAllPosts(){
         return daoPost.allPosts();
     }  
-
+   
     public PostDAO getDaoPost() {
         return daoPost;
     }

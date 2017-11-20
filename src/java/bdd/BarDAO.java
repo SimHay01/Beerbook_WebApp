@@ -24,6 +24,11 @@ public class BarDAO {
     public List<Bar> allBars(){
         Query query = em.createNamedQuery("Bar.findAll");
         return query.getResultList();
+    }
+
+    public void add(Bar b){
+        em.persist(b);
+        em.flush();
     }    
 
 

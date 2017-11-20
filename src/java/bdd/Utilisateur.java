@@ -33,6 +33,12 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Utilisateur.findByMdpU", query = "SELECT u FROM Utilisateur u WHERE u.mdpU = :mdpU")})
 public class Utilisateur implements Serializable {
 
+    @OneToMany(mappedBy = "idU")
+    private Collection<Decouvrirbar> decouvrirbarCollection;
+
+    @OneToMany(mappedBy = "idU")
+    private Collection<Decouvrirbiere> decouvrirbiereCollection;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -125,6 +131,22 @@ public class Utilisateur implements Serializable {
 
     public void setPostCollection(Collection<Post> postCollection) {
         this.postCollection = postCollection;
+    }
+
+    public Collection<Decouvrirbiere> getDecouvrirbiereCollection() {
+        return decouvrirbiereCollection;
+    }
+
+    public void setDecouvrirbiereCollection(Collection<Decouvrirbiere> decouvrirbiereCollection) {
+        this.decouvrirbiereCollection = decouvrirbiereCollection;
+    }
+
+    public Collection<Decouvrirbar> getDecouvrirbarCollection() {
+        return decouvrirbarCollection;
+    }
+
+    public void setDecouvrirbarCollection(Collection<Decouvrirbar> decouvrirbarCollection) {
+        this.decouvrirbarCollection = decouvrirbarCollection;
     }
     
 }
