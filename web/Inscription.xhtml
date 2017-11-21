@@ -16,7 +16,7 @@
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueil.xhtml"/>
 
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Inscription">
                 <h:panelGrid columns="3" cellpadding="5">
@@ -24,8 +24,16 @@
                     <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}" label="Pseudo" required="true">
                         <f:validateLength minimum="4" maximum="20" />
                     </p:inputText>                                       
-                    <p:message for="pseudo" />                  
-
+                    <p:message for="pseudo" />
+                </h:panelGrid>                    
+                
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="pp" value="Photo de profil :" />                    
+                    <p:fileUpload required="false" value="#{utilCtrl.file}" mode="simple" dragDropSupport="true"
+                                  update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                </h:panelGrid>
+                
+                <h:panelGrid columns="3" cellpadding="5">
                     <h:outputLabel for="mdp1" value="Mot de passe :" />
                     <p:password id="mdp1" value="#{utilCtrl.util.mdpU}" match="mdp2" label="Mot de passe" required="true" />
                     <p:message for="mdp1" />
@@ -33,20 +41,14 @@
                     <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
                     <p:password id="mdp2" value="#{utilCtrl.util.mdpU}" label="Confirmation mot de passe" required="true" />
                     <p:message for="mdp2" />
-
-                    <!--<h:outputLabel for="pp" value="Photo de profil :" />                    
-                    <p:fileUpload fileUploadListener="" mode="advanced" dragDropSupport="true"
-                        update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:growl id="messages" showDetail="true" />-->
-
                 </h:panelGrid>
                 <p:separator/>
                 <p:commandButton value="Valider" action="#{utilCtrl.addUtil()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
             </p:panel>
-        </h:form>        
+        </h:form>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
 

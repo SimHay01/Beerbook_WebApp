@@ -5,12 +5,16 @@
  */
 package bdd;
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -19,71 +23,66 @@ import org.primefaces.model.UploadedFile;
  */
 @Named(value = "utilCtrl")
 @SessionScoped
-public class UtilisateurCtrl implements Serializable {
-    
+public class UtilisateurCtrl extends HttpServlet implements Serializable {
+
     @EJB
     private UtilisateurDAO daoUtil;
     private Utilisateur util;
-    
+
     private String inputPseudo;
     private String inputMdp;
-    
-    private UploadedFile pic;
-    
+    private UploadedFile file;
+
     /**
      * Creates a new instance of BiereCtrl
      */
     public UtilisateurCtrl() {
         this.util = new Utilisateur();
-    }    
-    
-    public void addUtil(){
+    }
+
+    public void addUtil() {
+        if (file != null) {
+            this.util.setPhotoU(file.getFileName());
+        } else {
+            this.util.setPhotoU("default.png");
+        }
         daoUtil.add(this.util);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
         this.util = new Utilisateur();
     }
-    
-    public void updatePseudo(){
+
+    public void updatePseudo() {
         daoUtil.updatePseudo(inputPseudo, util.getIdU());
         util.setPseudoU(inputPseudo);
         setInputPseudo("");
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Sympa comme nouveau pseudo !"));        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Sympa comme nouveau pseudo !"));
     }
-    
-    public void updateMdp(){
+
+    public void updateMdp() {
         daoUtil.updateMdp(inputMdp, util.getIdU());
         util.setMdpU(inputMdp);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Ton mot de passe a été modifié."));        
-    }    
-    
-    public String checkConnexion(){
-        if(daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size() == 1) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Ton mot de passe a été modifié."));
+    }
+
+    public String checkConnexion() {
+        if (daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size() == 1) {
             setUtil(daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).get(0));
             daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).clear();
             setInputPseudo("");
-            return "Menu";            
+            return "Menu";
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));        
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));
         }
         return null;
     }
-    
-    public void uploadPic() {
-        if(pic != null) {
-            FacesMessage message = new FacesMessage("Succesful", pic.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-    }  
 
-    public UploadedFile getPic() {
-        return pic;
+    public UploadedFile getFile() {
+        return file;
     }
 
-    public void setPic(UploadedFile pic) {
-        this.pic = pic;
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
-    
-    
 
     public void setInputPseudo(String inputPseudo) {
         this.inputPseudo = inputPseudo;
@@ -91,7 +90,7 @@ public class UtilisateurCtrl implements Serializable {
 
     public void setInputMdp(String inputMdp) {
         this.inputMdp = inputMdp;
-    }    
+    }
 
     public String getInputPseudo() {
         return inputPseudo;
@@ -101,8 +100,6 @@ public class UtilisateurCtrl implements Serializable {
         return inputMdp;
     }
 
-    
-    
     public UtilisateurDAO getDaoUtil() {
         return daoUtil;
     }
@@ -117,5 +114,5 @@ public class UtilisateurCtrl implements Serializable {
 
     public void setUtil(Utilisateur util) {
         this.util = util;
-    }    
+    }
 }
