@@ -5,12 +5,18 @@
  */
 package bdd;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Locale;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -30,6 +36,8 @@ public class PostCtrl implements Serializable {
 
     private Integer idSelectedBeer;
     private Integer idSelectedBar;   
+    
+    private SimpleDateFormat sdf;
     
             
     /**
@@ -56,7 +64,13 @@ public class PostCtrl implements Serializable {
         idSelectedBeer = null;
         idSelectedBar = null;
         this.post = new Post();
-    } 
+    }
+    
+    public String displayDate(java.util.Date utilDate){
+        SimpleDateFormat dmyFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String dmy = dmyFormat.format(utilDate);
+        return dmy;
+    }
     
     public Biere findBeer(){
         return daoPost.findBeer(idSelectedBeer);
