@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "post")
 @NamedQueries({
-    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p ORDER BY p.dateP DESC")
     , @NamedQuery(name = "Post.findByIdP", query = "SELECT p FROM Post p WHERE p.idP = :idP")
     , @NamedQuery(name = "Post.findByNoteBiereP", query = "SELECT p FROM Post p WHERE p.noteBiereP = :noteBiereP")
     , @NamedQuery(name = "Post.findByNoteBarP", query = "SELECT p FROM Post p WHERE p.noteBarP = :noteBarP")

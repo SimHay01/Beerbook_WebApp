@@ -92,12 +92,8 @@
 
         <!-- Ring part -->
         <h:form>
-            <p:ring id="basic" value="#{biereCtrl.biere}" var="biere" autoplay="true" autoplayDuration="3000"
-                    autoplayPauseOnHover="true">
-                <p:outputPanel style="text-align: center;" layout="block">
-                    #{biereCtrl.biere.nomBi}
-                    <p:rating value="#{postCtrl.post.noteBiereP}" readonly="true" stars="10"/>
-                </p:outputPanel>
+            <p:ring id="basic" value="#{ring.bieres}" var="bi" styleClass="image-ring" easing="easeInOutBack">
+                <p:graphicImage url="Images/#{bi}.png" width="20px" />
             </p:ring>
         </h:form>
 
