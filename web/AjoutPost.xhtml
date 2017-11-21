@@ -28,19 +28,20 @@ and open the template in the editor.
                     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
                     <p:panel header="Exprime-toi" style="margin-bottom:10px;">
-                        <h:outputLabel value="#{utilCtrl.util.pseudoU}"/>
                         <h:panelGrid columns="1" cellpadding="5">
                             <p:message for="beers"/>
                             <p:message for="bars"/>                    
                         </h:panelGrid>
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:outputLabel value="J'ai bu une " />
-                            <p:selectOneMenu id="beers" value="#{postCtrl.idSelectedBeer}" required="true">
+                            <p:selectOneMenu id="beers" value="#{postCtrl.idSelectedBeer}" required="true" 
+                                             requiredMessage="Merci de choisir une bière dans la liste déroulante">
                                         <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.idBi}" itemLabel="#{bi.nomBi}"/>
                                     </p:selectOneMenu>
                             <p:outputLabel value=" à " />
-                            <p:selectOneMenu id="bars" value="#{postCtrl.idSelectedBar}" required="true">
+                            <p:selectOneMenu id="bars" value="#{postCtrl.idSelectedBar}" required="true"
+                                             requiredMessage="Merci de choisir un bar dans la liste déroulante">
                                 <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
                             </p:selectOneMenu>                                        
@@ -48,19 +49,23 @@ and open the template in the editor.
 
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:outputLabel value="Je mets la note de " />
-                            <p:rating id="noteBiere" value="#{postCtrl.post.noteBiereP}" stars="10" required="true" />  
+                            <p:rating id="noteBiere" value="#{postCtrl.post.noteBiereP}" stars="10" required="true"
+                                      requiredMessage="Merci de noter la bière en cliquant sur les étoiles"/>  
                             <p:outputLabel value=" à cette bière." />
                             <p:message for="noteBiere"/>                                        
 
                             <p:outputLabel value="Je mets la note de "/>
-                            <p:rating id="noteBar" value="#{postCtrl.post.noteBarP}" stars="10" required="true"/>  
+                            <p:rating id="noteBar" value="#{postCtrl.post.noteBarP}" stars="10" required="true"
+                                      requiredMessage="Merci de noter le bar en cliquant sur les étoiles"/>  
                             <p:outputLabel value=" à ce bar." />
                             <p:message for="noteBar"/>                    
                         </h:panelGrid>
 
                         <h:panelGrid columns="1" cellpadding="5">
                             <p:outputLabel value="Ton avis sur cette dégustation : " />
-                            <p:inputTextarea id="com" value="#{postCtrl.post.commentP}" required="true" rows="5" cols="30" counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false" />                                        
+                            <p:inputTextarea id="com" value="#{postCtrl.post.commentP}" required="true" rows="5" cols="30" 
+                                             counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false"
+                                             requiredMessage="Merci de donner votre avis sur la dégustation"/>                                        
                             <h:outputText id="carac_restant" />
                         </h:panelGrid>                
                         <h:panelGrid columns="1" cellpadding="5">
@@ -68,7 +73,8 @@ and open the template in the editor.
                         </h:panelGrid>
 
                         <p:separator />
-                        <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost(utilCtrl.util)}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                        <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost(utilCtrl.util)}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
                         <p:separator />
                     </p:panel>
                 </h:form>
@@ -109,7 +115,8 @@ and open the template in the editor.
                             <p:message for="paysBi" />                            
                         </h:panelGrid>
                         <p:separator/>
-                        <p:commandButton id="addBeer" value="Ajouter" actionListener="#{biereCtrl.addBiere()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                        <p:commandButton id="addBeer" value="Ajouter" actionListener="#{biereCtrl.addBiere()}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
                     </p:dialog>
                 </h:form>
 
@@ -135,7 +142,8 @@ and open the template in the editor.
                             <p:message for="paysBa"/>                                                                  
                         </h:panelGrid>
                         <p:separator/>
-                        <p:commandButton id="addBar" value="Ajouter" actionListener="#{barCtrl.addBar()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                        <p:commandButton id="addBar" value="Ajouter" actionListener="#{barCtrl.addBar()}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
                     </p:dialog>                                   
                 </h:form>   
 

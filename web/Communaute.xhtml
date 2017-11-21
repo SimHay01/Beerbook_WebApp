@@ -31,34 +31,23 @@
                             </p:panelGrid>                             
                             <p:panelGrid columns="1">
                                 <p:panelGrid columns="4" >
-                                    <p:outputLabel value="#{p.idU.pseudoU}"/>
-                                    <p:outputLabel value="a bu une"/>
-                                    <p:outputLabel value="#{p.idBi.nomBi}"/>
-                                    <p:outputLabel value="à"/>
-                                    <p:outputLabel value="#{p.idBa.nomBa}"/>
+                                    <p:outputLabel value="#{p.idU.pseudoU} a bu une #{p.idBi.nomBi} au #{p.idBa.nomBa}"/>
                                 </p:panelGrid>
                                 <p:separator/>
                                 <p:panelGrid columns="3">
-                                    <p:outputLabel value="&#34;"/>
-                                    <p:outputLabel value="#{p.commentP}"/>
-                                    <p:outputLabel value="&#34;"/>
+                                    <p:outputLabel value="Commentaire : #{p.commentP}"/>
                                 </p:panelGrid>
                                 <p:panelGrid columns="4">
-                                    <p:outputLabel value="Son avis sur la"/>
-                                    <p:outputLabel value="#{p.idBi.nomBi}"/>
-                                    <p:outputLabel value=":"/>
+                                    <p:outputLabel value="Son avis sur la #{p.idBi.nomBi} :"/>
                                     <p:rating value="#{p.noteBiereP}" stars="10" readonly="true"/>  
                                 </p:panelGrid>
                                 <p:panelGrid columns="4">
-                                    <p:outputLabel value="Son avis sur le"/>
-                                    <p:outputLabel value="#{p.idBa.nomBa}"/>
-                                    <p:outputLabel value=":"/>
-                                    <p:rating value="#{p.noteBarP}" stars="10" readonly="true"/>  
+                                    <p:outputLabel value="Son avis sur le #{p.idBa.nomBa} :"/>
+                                    <p:rating value="#{p.noteBarP}" stars="10" readonly="true" />  
                                 </p:panelGrid>
                                 <p:separator/>
                                 <p:panelGrid columns="4">
-                                    <p:outputLabel value="Posté le"/>
-                                    <p:outputLabel value="#{p.dateP}"/>
+                                    <p:outputLabel value="Posté le #{p.dateP}"/>
                                 </p:panelGrid>
                             </p:panelGrid>                     
                         </p:panelGrid>
