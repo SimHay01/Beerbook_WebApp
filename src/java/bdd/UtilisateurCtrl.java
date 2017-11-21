@@ -69,6 +69,7 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
             setUtil(daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).get(0));
             daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).clear();
             setInputPseudo("");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue !", "Vous êtes connecté"));
             return "Menu";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));
