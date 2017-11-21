@@ -22,10 +22,6 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-image">
-                            <div class="center">
-                                <h:outputLabel value="Bienvenue #{utilCtrl.util.pseudoU} !" style="text-transform: uppercase; color: black" />
-                            </div>
-
                             <p:growl id="msgs" showDetail="true" />
                             <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3">
                                 <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
