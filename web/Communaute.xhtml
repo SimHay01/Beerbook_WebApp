@@ -47,7 +47,8 @@
                                 </p:panelGrid>
                                 <p:separator/>
                                 <p:panelGrid columns="4">
-                                    <p:outputLabel value="Posté le #{p.dateP}"/>
+                                    <p:outputLabel value="Posté le"/>
+                                    <p:outputLabel value="#{postCtrl.displayDate(p.dateP)}"/>
                                 </p:panelGrid>
                             </p:panelGrid>                     
                         </p:panelGrid>
