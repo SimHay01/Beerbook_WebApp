@@ -6,6 +6,7 @@
 package bdd;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -26,10 +27,9 @@ public class PostCtrl implements Serializable {
     @EJB
     private PostDAO daoPost;
     private Post post;
-    
-    @EJB
-    private UtilisateurDAO daoUtil;
-    private Utilisateur util;
+
+    private Integer idSelectedBeer;
+    private Integer idSelectedBar;   
     
             
     /**
@@ -39,17 +39,32 @@ public class PostCtrl implements Serializable {
         this.post = new Post();
     }
     
-    public void addPost(){
-        new SimpleDateFormat("yyyy-MM-dd").format(this.post.setDateP());
-        this.post.setIdU(this.daoUtil.checkConnexion(util.getPseudoU(), util.getMdpU()).get(0));        
-        daoPost.addPost(this.post);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Merci pour ta publication !", "Ton post est maintenant visible par la communauté Beerbook !"));
-        this.post = new Post();
-    }    
-    
     public List<Post> getAllPosts(){
         return daoPost.allPosts();
-    }  
+    }
+    
+    public void addPost(Utilisateur connectedUser){
+        this.post.setIdBi(findBeer());
+        this.post.setIdBa(findBar());
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        java.util.Date utilDate = cal.getTime();
+        java.sql.Date sqlDate = new Date(utilDate.getTime()); 
+        this.post.setDateP(sqlDate);
+        this.post.setIdU(connectedUser);
+        daoPost.addPost(this.post);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Merci pour ta publication !", "Ton post est maintenant visible par la communauté Beerbook !"));
+        idSelectedBeer = null;
+        idSelectedBar = null;
+        this.post = new Post();
+    } 
+    
+    public Biere findBeer(){
+        return daoPost.findBeer(idSelectedBeer);
+    }
+    
+    public Bar findBar(){
+        return daoPost.findBar(idSelectedBar);
+    } 
    
     public PostDAO getDaoPost() {
         return daoPost;
@@ -66,6 +81,24 @@ public class PostCtrl implements Serializable {
     public void setPost(Post post) {
         this.post = post;
     }
+
+    public Integer getIdSelectedBeer() {
+        return idSelectedBeer;
+    }
+
+    public void setIdSelectedBeer(Integer idSelectedBeer) {
+        this.idSelectedBeer = idSelectedBeer;
+    }
+
+    public Integer getIdSelectedBar() {
+        return idSelectedBar;
+    }
+
+    public void setIdSelectedBar(Integer idSelectedBar) {
+        this.idSelectedBar = idSelectedBar;
+    }
+    
+    
 
 
     

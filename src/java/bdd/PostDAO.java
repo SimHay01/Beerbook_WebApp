@@ -29,7 +29,19 @@ public class PostDAO {
     public List<Post> allPosts(){
         Query query = em.createNamedQuery("Post.findAll");
         return query.getResultList();
+    }   
+    
+    public Biere findBeer(Integer idSelectedBeer){
+        Query queryFindBeer = em.createQuery(
+                "SELECT b FROM Biere b WHERE b.idBi = :idSelectedBeer")
+                .setParameter("idSelectedBeer", idSelectedBeer);
+        return (Biere) queryFindBeer.getSingleResult();
+    }
+    
+    public Bar findBar(Integer idSelectedBar){
+        Query queryFindBar = em.createQuery(
+                "SELECT b FROM Bar b WHERE b.idBa = :idSelectedBar")
+                .setParameter("idSelectedBar", idSelectedBar);
+        return (Bar) queryFindBar.getSingleResult();
     }    
-
-
 }

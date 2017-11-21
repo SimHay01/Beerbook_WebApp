@@ -28,20 +28,21 @@ and open the template in the editor.
                     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
                     <p:panel header="Exprime-toi" style="margin-bottom:10px;">
+                        <h:outputLabel value="#{utilCtrl.util.pseudoU}"/>
                         <h:panelGrid columns="1" cellpadding="5">
                             <p:message for="beers"/>
                             <p:message for="bars"/>                    
                         </h:panelGrid>
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:outputLabel value="J'ai bu une " />
-                            <p:selectOneMenu id="beers" value="#{postCtrl.post.idBi}" required="true">
-                                <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi}" itemLabel="#{bi.nomBi}"/>
-                            </p:selectOneMenu>
+                            <p:selectOneMenu id="beers" value="#{postCtrl.idSelectedBeer}" required="true">
+                                        <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.idBi}" itemLabel="#{bi.nomBi}"/>
+                                    </p:selectOneMenu>
                             <p:outputLabel value=" à " />
-                            <p:selectOneMenu id="bars" value="#{postCtrl.post.idBa}" required="true">
+                            <p:selectOneMenu id="bars" value="#{postCtrl.idSelectedBar}" required="true">
                                 <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba}" itemLabel="#{ba.nomBa}"/>
+                                <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
                             </p:selectOneMenu>                                        
                         </h:panelGrid>
 
@@ -67,7 +68,7 @@ and open the template in the editor.
                         </h:panelGrid>
 
                         <p:separator />
-                        <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                        <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost(utilCtrl.util)}" ajax="false" icon="ui-icon-check" validateClient="true"/>
                         <p:separator />
                     </p:panel>
                 </h:form>

@@ -27,7 +27,7 @@
                     <p:message for="pseudo" />
                 </h:panelGrid>                    
                 
-                <h:panelGrid columns="2" cellpadding="5">
+                <h:panelGrid columns="2">
                     <h:outputLabel for="pp" value="Photo de profil :" />                    
                     <p:fileUpload required="false" value="#{utilCtrl.file}" mode="simple" dragDropSupport="true"
                                   update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
