@@ -7,10 +7,19 @@
     <nav class="blue-grey lighten-2" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" class="brand-logo">BEER - BOOK</a>
-            <ul>
-                <li class="right hide-on-med-and-down">
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <h:form>
+                        <h:commandLink value="Menu de #{utilCtrl.util.pseudoU}" class="center"/>
+                    </h:form>
+                </li>
+                <li>
+                    <h:form>
+                        <h:commandLink value="Se déconnecter" action="#{utilCtrl.logout()}" class="center"/>
+                    </h:form>
+                </li>
+                <li>
                     <a href="HomePage.xhtml" class="right">Accueil</a>
-                    <h:outputLabel value="Menu de #{utilCtrl.util.pseudoU}" style="text-transform: uppercase; color: black" class="center"/>
                 </li>
             </ul>
         </div>
