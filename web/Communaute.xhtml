@@ -30,25 +30,26 @@
                                 <p:outputLabel value="Photo profil"/>
                             </p:panelGrid>                             
                             <p:panelGrid columns="1">
-                                <p:panelGrid columns="4" >
+                                <p:panelGrid columns="1" >
                                     <p:outputLabel value="#{p.idU.pseudoU} a bu une #{p.idBi.nomBi} au #{p.idBa.nomBa}"/>
                                 </p:panelGrid>
                                 <p:separator/>
-                                <p:panelGrid columns="3">
-                                    <p:outputLabel value="Commentaire : #{p.commentP}"/>
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son commentaire : &#34;#{p.commentP}&#34;"/>
                                 </p:panelGrid>
-                                <p:panelGrid columns="4">
-                                    <p:outputLabel value="Son avis sur la #{p.idBi.nomBi} :"/>
-                                    <p:rating value="#{p.noteBiereP}" stars="10" readonly="true"/>  
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son avis sur la #{p.idBi.nomBi} :">                                                   
+                                        <p:rating value="#{p.noteBiereP}" stars="10" readonly="true"/>
+                                    </p:outputLabel>
                                 </p:panelGrid>
-                                <p:panelGrid columns="4">
-                                    <p:outputLabel value="Son avis sur le #{p.idBa.nomBa} :"/>
-                                    <p:rating value="#{p.noteBarP}" stars="10" readonly="true" />  
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son avis sur le #{p.idBa.nomBa} :">
+                                        <p:rating value="#{p.noteBarP}" stars="10" readonly="true" />  
+                                    </p:outputLabel>
                                 </p:panelGrid>
                                 <p:separator/>
-                                <p:panelGrid columns="4">
-                                    <p:outputLabel value="Posté le"/>
-                                    <p:outputLabel value="#{postCtrl.displayDate(p.dateP)}"/>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Posté le #{postCtrl.displayDate(p.dateP)}"/>
                                 </p:panelGrid>
                             </p:panelGrid>                     
                         </p:panelGrid>
