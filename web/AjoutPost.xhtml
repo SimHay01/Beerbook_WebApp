@@ -91,28 +91,28 @@ and open the template in the editor.
 
                     <p:dialog widgetVar="ajoutBiereDialog" header="Ajout d'une bière" minHeight="40" resizable="false" closeOnEscape="true">
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="nomBi" value="Nom de la bière :" />
+                            <h:outputLabel for="nomBi" value="Nom de la bière :" style="font-size: 20px"/>
                             <p:inputText id="nomBi" value="#{biereCtrl.biere.nomBi}" label="nomBi" required="true"
                                          requiredMessage="Merci de saisir un nom de bière">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>                                       
                             <p:message for="nomBi"/>                   
 
-                            <h:outputLabel for="pourcentBi" value="Pourcentage d'alcool :" />
+                            <h:outputLabel for="pourcentBi" value="Pourcentage d'alcool :" style="font-size: 20px" />
                             <p:inputText id="pourcentBi" value="#{biereCtrl.biere.pourcentBi}" label="pourcentBi" required="true"
                                          requiredMessage="Merci de saisir le pourcentage d'alcool">
                                 <f:validateDoubleRange minimum="1" maximum="30" />
                             </p:inputText>                                       
                             <p:message for="pourcentBi" /> 
 
-                            <h:outputLabel for="typeBi" value="Type de bière : (à voir pour mettre un menu déroulant avec choix prédéfinis)" />
+                            <h:outputLabel for="typeBi" value="Type de bière : (à voir pour mettre un menu déroulant avec choix prédéfinis)" style="font-size: 20px"/>
                             <p:inputText id="typeBi" value="#{biereCtrl.biere.typeBi}" label="typeBi" required="true"
                                          requiredMessage="Merci de saisir le type de la bière">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>                                       
                             <p:message for="typeBi" /> 
 
-                            <h:outputLabel for="paysBi" value="Pays de fabrication :" />
+                            <h:outputLabel for="paysBi" value="Pays de fabrication :" style="font-size: 20px"/>
                             <p:inputText id="paysBi" value="#{biereCtrl.biere.paysBi}" label="paysBi" required="true"
                                          requiredMessage="Merci de saisir le pays de fabrication">
                                 <f:validateLength minimum="4" maximum="20" />
@@ -128,21 +128,21 @@ and open the template in the editor.
                 <h:form>
                     <p:dialog widgetVar="ajoutBarDialog" header="Ajout d'un bar" minHeight="40" resizable="false" closeOnEscape="true">
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="nomBa" value="Nom du bar :" />
+                            <h:outputLabel for="nomBa" value="Nom du bar :" style="font-size: 20px"/>
                             <p:inputText id="nomBa" value="#{barCtrl.bar.nomBa}" label="nomBa" required="true"
                                          requiredMessage="Merci de saisir un nom de bar">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>                                       
                             <p:message for="nomBa"/>
 
-                            <h:outputLabel for="villeBa" value="Ville dans laquelle se trouve le bar :" />
+                            <h:outputLabel for="villeBa" value="Ville dans laquelle se trouve le bar :" style="font-size: 20px"/>
                             <p:inputText id="villeBa" value="#{barCtrl.bar.villeBa}" label="villeBa" required="true"
                                          requiredMessage="Merci de saisir la ville dans laquelle se trouve le bar">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>                                       
                             <p:message for="villeBa"/>
 
-                            <h:outputLabel for="paysBa" value="Pays dans lequel se trouve le bar :" />
+                            <h:outputLabel for="paysBa" value="Pays dans lequel se trouve le bar :" style="font-size: 20px" />
                             <p:inputText id="paysBa" value="#{barCtrl.bar.paysBa}" label="paysBa" required="true"
                                          requiredMessage="Merci de saisir le pays dans lequel se trouve le bar">
                                 <f:validateLength minimum="4" maximum="20" />
