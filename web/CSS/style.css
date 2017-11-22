@@ -8,6 +8,11 @@
 
 .ui-widget{
     font-family: 'MedievalSharp', cursive;
+    font-size: 20px;
+}
+
+.ui-button{
+    font-family: 'MedievalSharp', cursive;    
 }
 
 .ui-widget-content {
