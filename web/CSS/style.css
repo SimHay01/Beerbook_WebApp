@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+.ui-widget{
+    font-family: 'MedievalSharp', cursive;
+}
+
 .ui-widget-content {
     border:none
 }

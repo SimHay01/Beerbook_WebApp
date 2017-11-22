@@ -76,6 +76,7 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        this.util = new Utilisateur();
         return "HomePage.xhtml?faces-redirect=true";
     }
 
