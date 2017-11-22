@@ -15,6 +15,10 @@
     font-family: 'MedievalSharp', cursive;    
 }
 
+.ui-button-text{
+    font-family: 'MedievalSharp', cursive;    
+}
+
 .ui-widget-content {
     border:none
 }
