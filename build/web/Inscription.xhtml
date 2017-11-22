@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -14,39 +13,56 @@
     </h:head>
     <h:body>
         <!-- Call the header -->
-        <ui:include src="Header/HeaderAccueil.xhtml"/>
+        <nav class="blue-grey lighten-2" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">BEER - BOOK</a>
+                <ul class="right hide-on-med-and-down">
+                    <a href="HomePage.xhtml" class="right">Accueil</a>
+                </ul>
+                
+            </div>
+        </nav>
 
-        <h:form>
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:panel header="Inscription">
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="pseudo" value="Pseudo :" />
-                    <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}" label="Pseudo" required="true">
-                        <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="pseudo" />                  
+        <div class="container">
+            <div class="section">
+                <h:form enctype="multipart/form-data">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:panel header="Inscription">
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <h:outputLabel for="pseudo" value="Pseudo :" />
+                            <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}" label="Pseudo" required="true"
+                                         requiredMessage="Merci de saisir un pseudo">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="pseudo" />
+                        </h:panelGrid>                    
 
-                    <h:outputLabel for="mdp1" value="Mot de passe :" />
-                    <p:password id="mdp1" value="#{utilCtrl.util.mdpU}" match="mdp2" label="Mot de passe" required="true" />
-                    <p:message for="mdp1" />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="pp" value="Photo de profil :" />                    
+                            <p:fileUpload required="false" value="#{utilCtrl.file}" mode="simple" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        </h:panelGrid>
 
-                    <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
-                    <p:password id="mdp2" value="#{utilCtrl.util.mdpU}" label="Confirmation mot de passe" required="true" />
-                    <p:message for="mdp2" />
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <h:outputLabel for="mdp1" value="Mot de passe :" />
+                            <p:password id="mdp1" value="#{utilCtrl.util.mdpU}" match="mdp2" label="Mot de passe" required="true"
+                                        requiredMessage="Merci de saisir un mot de passe"/>
+                            <p:message for="mdp1" />
 
-                    <!--<h:outputLabel for="pp" value="Photo de profil :" />                    
-                    <p:fileUpload fileUploadListener="" mode="advanced" dragDropSupport="true"
-                        update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:growl id="messages" showDetail="true" />-->
-
-                </h:panelGrid>
-                <p:separator/>
-                <p:commandButton value="Valider" action="#{utilCtrl.addUtil()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
-            </p:panel>
-        </h:form>        
+                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                            <p:password id="mdp2" value="#{utilCtrl.util.mdpU}" label="Confirmation mot de passe" required="true"
+                                        requiredMessage="Merci de répéter le mot de passe"/>
+                            <p:message for="mdp2" />
+                        </h:panelGrid>
+                        <p:separator/>
+                        <p:commandButton value="Valider" action="#{utilCtrl.addUtil()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
+                    </p:panel>
+                </h:form>
+            </div>
+        </div>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
 

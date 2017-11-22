@@ -16,64 +16,60 @@
         <ui:include src="Header/HeaderAccueilMenu.xhtml"/>
 
 
-        <p:tabView>
-            <p:tab title="Ta Drink List">              
-                <h:form>
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:dataList value="#{decouvrirBiCtrl.getDrinkList(utilCtrl.util)}" emptyMessage="Aucune bière dans ta Drink List. Pour en ajouter, va dans 'Classements'." var="dl" type="definition">
-                        <p:panelGrid columns="3">
-                            <p:panelGrid columns="1">
-                                <p:commandButton action="#{decouvrirBiCtrl.removeBiere(dl)}" ajax="false" icon="ui-icon-trash"/>
-                            </p:panelGrid>                             
-                            <p:panelGrid columns="1">
-                                <p:panelGrid columns="1">
-                                    <h:outputText value="Photo" />
+        <div class="container">
+            <div class="section">
+                <p:tabView>
+                    <p:tab title="Ta Drink List">              
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:dataList value="#{decouvrirBiCtrl.getDrinkList(utilCtrl.util)}" emptyMessage="Aucune bière dans ta Drink List. Pour en ajouter, va dans 'Classements'." var="dl" type="definition">
+                                <p:panelGrid columns="3">
+                                    <p:panelGrid columns="1">
+                                        <p:commandButton action="#{decouvrirBiCtrl.removeBiere(dl)}" ajax="false" icon="ui-icon-trash"/>
+                                    </p:panelGrid>
+                                    <p:panelGrid columns="1">
+                                        <p:panelGrid columns="1">
+                                            <h:outputText value="Photo" />
+                                        </p:panelGrid>
+                                        <p:panelGrid columns="2">
+                                            <h:outputText value="#{dl.idBi.nomBi} - #{dl.idBi.typeBi} - #{dl.idBi.pourcentBi} % - #{dl.idBi.paysBi}" />
+                                        </p:panelGrid>    
+                                    </p:panelGrid>                     
                                 </p:panelGrid>
                                 <p:panelGrid columns="2">
-                                    <h:outputText value="#{dl.idBi.pourcentBi}"/>
-                                    <h:outputText value=" %" />
-                                </p:panelGrid>    
-                            </p:panelGrid>
-                            <p:panelGrid columns="1">
-                                <h:outputText value="#{dl.idBi.nomBi}" />
-                                <h:outputText value="#{dl.idBi.typeBi}" />
-                                <h:outputText value="#{dl.idBi.paysBi}" />
-                            </p:panelGrid>                       
-                        </p:panelGrid>
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Ce qu'en pense la communauté Beerbook : " />                            
-                            <p:rating id="noteMoyenneBi" value="#{decouvrirBiCtrl.averageRating(dl.idBi, utilCtrl.util)}" stars="10" readonly="true"/>                                                                                      
-                        </p:panelGrid>
-                        <p:separator/>
-                    </p:dataList>  
-                </h:form>                                  
-            </p:tab>
-            <p:tab title="Ta Pub List">
-                <h:form>
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:dataList value="#{decouvrirBaCtrl.getPubList(utilCtrl.util)}" emptyMessage="Aucun bar dans ta Pub List. Pour en ajouter, va dans 'Classements'." var="pl" type="definition">
-                        <p:panelGrid columns="2">
-                            <p:panelGrid columns="1">
-                                <p:commandButton action="#{decouvrirBaCtrl.removeBar(pl)}" ajax="false" icon="ui-icon-trash"/>
-                            </p:panelGrid>                             
-                            <p:panelGrid columns="1">
-                                <h:outputText value="#{pl.idBa.nomBa}" />
-                                <h:outputText value="#{pl.idBa.villeBa}" />
-                                <h:outputText value="#{pl.idBa.paysBa}" />
-                            </p:panelGrid>                       
-                        </p:panelGrid>
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Ce qu'en pense la communauté Beerbook : " />
-                            <p:rating id="noteMoyenneBa" value="#{decouvrirBaCtrl.barAverageRating(pl.idBa, utilCtrl.util)}" stars="10" readonly="true"/>
-                        </p:panelGrid>
-                        <p:separator/>
-                    </p:dataList>  
-                </h:form>
-            </p:tab>
-        </p:tabView>        
+                                    <h:outputText value="Ce qu'en pense la communauté Beerbook : " />                            
+                                    <p:rating id="noteMoyenneBi" value="#{decouvrirBiCtrl.averageRating(dl.idBi, utilCtrl.util)}" stars="10" readonly="true"/>
+                                </p:panelGrid>
+                                <p:separator/>
+                            </p:dataList>  
+                        </h:form>                                  
+                    </p:tab>
+                    <p:tab title="Ta Pub List">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:dataList value="#{decouvrirBaCtrl.getPubList(utilCtrl.util)}" emptyMessage="Aucun bar dans ta Pub List. Pour en ajouter, va dans 'Classements'." var="pl" type="definition">
+                                <p:panelGrid columns="2">
+                                    <p:panelGrid columns="1">
+                                        <p:commandButton action="#{decouvrirBaCtrl.removeBar(pl)}" ajax="false" icon="ui-icon-trash"/>
+                                    </p:panelGrid>                             
+                                    <p:panelGrid columns="1">
+                                        <h:outputText value="#{pl.idBa.nomBa} - #{pl.idBa.villeBa} - #{pl.idBa.paysBa}" />
+                                    </p:panelGrid>                       
+                                </p:panelGrid>
+                                <p:panelGrid columns="2">
+                                    <h:outputText value="Ce qu'en pense la communauté Beerbook : " />
+                                    <p:rating id="noteMoyenneBa" value="#{decouvrirBaCtrl.barAverageRating(pl.idBa, utilCtrl.util)}" stars="10" readonly="true"/>
+                                </p:panelGrid>
+                                <p:separator/>
+                            </p:dataList>  
+                        </h:form>
+                    </p:tab>
+                </p:tabView>      
+            </div>
+        </div>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
     </h:body>

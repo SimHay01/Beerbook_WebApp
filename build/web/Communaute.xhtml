@@ -3,23 +3,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <title>Communauté</title>
+        <title>A découvrir</title>
     </h:head>
     <h:body>
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueilMenu.xhtml"/>
 
 
-        <div>TODO write content</div>
+        <div class="container">
+            <div class="section">
+                <h:form>
+                    <p:growl id="msgs" showDetail="true" />
+                    <p:dataList value="#{postCtrl.allPosts}" emptyMessage="Aucun post de la communauté pour le moment.'." var="p" type="definition">
+                        <f:facet name="header">
+                            Activité de la communauté Beerbook
+                        </f:facet>
+                        <p:panelGrid columns="2">
+                            <p:panelGrid columns="1">
+                                <p:outputLabel value="Photo profil"/>
+                            </p:panelGrid>                             
+                            <p:panelGrid columns="1">
+                                <p:panelGrid columns="1" >
+                                    <p:outputLabel value="#{p.idU.pseudoU} a bu une #{p.idBi.nomBi} au #{p.idBa.nomBa}"/>
+                                </p:panelGrid>
+                                <p:separator/>
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son commentaire : &#34;#{p.commentP}&#34;"/>
+                                </p:panelGrid>
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son avis sur la #{p.idBi.nomBi} :">                                                   
+                                        <p:rating value="#{p.noteBiereP}" stars="10" readonly="true"/>
+                                    </p:outputLabel>
+                                </p:panelGrid>
+                                <p:panelGrid columns="1">
+                                    <p:outputLabel value="Son avis sur le #{p.idBa.nomBa} :">
+                                        <p:rating value="#{p.noteBarP}" stars="10" readonly="true" />  
+                                    </p:outputLabel>
+                                </p:panelGrid>
+                                <p:separator/>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Posté le #{postCtrl.displayDate(p.dateP)}"/>
+                                </p:panelGrid>
+                            </p:panelGrid>                     
+                        </p:panelGrid>
+                        <p:separator/>
+                    </p:dataList>  
+                </h:form>                                  
+            </div>
+        </div>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
     </h:body>

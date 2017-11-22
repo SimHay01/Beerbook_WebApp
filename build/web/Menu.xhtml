@@ -15,22 +15,26 @@
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueil.xhtml"/>
 
+
         <!-- Tag cloud part -->
         <div class="container">
             <div class="section">
                 <div class="row">
-                    <h:outputLabel value="Bienvenue #{utilCtrl.util.pseudoU} !" class="col offset-s6 "/> <br/>
-
-                    <p:growl id="msgs" showDetail="true" />
-                    <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3 ">
-                        <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
-                    </p:tagCloud>
+                    <div class="card">
+                        <div class="card-image">
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:tagCloud model="#{tagCloud.menu}" class="col s6 push-s3">
+                                <p:ajax event="select" update="msgs" listener="#{tagCloud.onSelect}"/>
+                            </p:tagCloud>
+                            <img src="Images/backgroundMenu.jpg" class="responsive-img"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
 

@@ -8,13 +8,13 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <title>Beer - book</title>
+        <title>Accueil</title>
     </h:head>
     <h:body>
         <!-- Header part -->
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container">"
-                <a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <nav class="blue-grey lighten-2" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">BEER - BOOK</a>
                 <ul class="right hide-on-med-and-down"></ul>
             </div>
         </nav>
@@ -36,8 +36,10 @@
                                 <div class="section">
                                     <div class="row">
                                         <div class="col s6 push-s3">
-                                            <p:inputText value="#{utilCtrl.inputPseudo}" class="centered" style="text-align: center; margin-bottom: 4px;" title="Enter your login" /> <br></br>
-                                            <p:password value="#{utilCtrl.inputMdp}" style="text-align: center; margin-bottom: 4px;" title="Enter your password"
+                                            <p:inputText value="#{utilCtrl.inputPseudo}" class="centered" style="text-align: center;
+                                                         margin-bottom: 4px;" title="Saisissez votre pseudo ici" /> <br></br>
+                                            <p:password value="#{utilCtrl.inputMdp}" style="text-align: center; margin-bottom: 4px;"
+                                                        title="Saisissez votre mot de passe ici"
                                                         class=""/> <br></br>
                                         </div>
                                     </div>
@@ -72,7 +74,7 @@
                         <div class="icon-block">
                             <h2 class="center brown-text"><i class="material-icons">language</i></h2>
                             <h5 class="center">La plus grosse communauté au monde</h5>
-                            <p class="light">Avec près de 80 millions d'utilisateurs dans le monde qu'attendez-vous pour nous rejoindre ?  Vous ne trouverez pas mieux ailleurs</p>
+                            <p class="light">Avec près de 80 millions d'utilisateurs dans le monde qu'attendez-vous pour nous rejoindre ?  Vous ne trouverez pas mieux ailleurs !</p>
                         </div>
                     </div>
 
@@ -80,7 +82,7 @@
                         <div class="icon-block">
                             <h2 class="center brown-text"><i class="material-icons">thumb_up</i></h2>
                             <h5 class="center">Facile d'utilisation</h5>
-                            <p class="light">Nous avons travaillé d'arrache pied afin de rendre notre application simple d'utilisation. L'essayer c'est l'adopter ! Beerbook est gratuit et le restera toujours</p>
+                            <p class="light">Nous avons travaillé d'arrache pied afin de rendre notre application simple d'utilisation. L'essayer c'est l'adopter ! Beerbook est gratuit et le restera toujours.</p>
                         </div>
                     </div>
                 </div>
@@ -90,12 +92,8 @@
 
         <!-- Ring part -->
         <h:form>
-            <p:ring id="basic" value="#{biereCtrl.biere}" var="biere" autoplay="true" autoplayDuration="3000"
-                    autoplayPauseOnHover="true">
-                <p:outputPanel style="text-align: center;" layout="block">
-                    #{biereCtrl.biere.nomBi}
-                    <p:rating value="#{postCtrl.post.noteBiereP}" readonly="true" stars="10"/>
-                </p:outputPanel>
+            <p:ring id="basic" value="#{ring.bieres}" var="bi" styleClass="image-ring" easing="easeInOutBack">
+                <p:graphicImage url="Images/#{bi}.png" width="20px" />
             </p:ring>
         </h:form>
 
@@ -109,7 +107,7 @@
                     <br></br>
                 </div>
             </div>
-            <div class="parallax"><img src="Images/bouffe2.jpeg" alt="Unsplashed background img 1"/></div>
+            <div class="parallax"><img src="Images/bouffe.jpeg" alt="Unsplashed background img 1"/></div>
         </div>
 
 
@@ -122,10 +120,14 @@
                                          class="btn-large waves-effect waves-light teal lighten" onclick="PF('dialog').show();"/>
                     </h:panelGrid>
                     <p:dialog widgetVar="dialog" minHeight="40" resizable="false" closeOnEscape="true">
-                        <img src="Images/Carlito.JPG" width="120" height="120" align="left" style="margin-right: 2px"/>
-                        <img src="Images/Sim.JPG" width="120" height="120" align="right"/>
+                        <img src="Images/Carlito.JPG" width="140" height="140" align="left" style="margin-right: 2px" class="circle" alt="Carlito" title="Allô ? C'est Carlito !"/>
+                        <img src="Images/Sim.JPG" width="140" height="140" align="right" class="circle" alt="Sim" title="Yo ! Moi c'est Sim !"/>
                         <br>
-                            <h:outputText value="M2 GPhy" />
+                            <div class="container">
+                                <div class="center">
+                                    <h:outputText value="M2 GPhy"/>
+                                </div>
+                            </div>
                         </br>
                     </p:dialog>
                 </div>
@@ -133,7 +135,7 @@
         </div>
 
         <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>
 

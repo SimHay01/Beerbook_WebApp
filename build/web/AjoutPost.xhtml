@@ -21,122 +21,143 @@ and open the template in the editor.
         <!-- Call the header -->
         <ui:include src="Header/HeaderAccueilMenu.xhtml"/>
 
-        <h:form>
+        <div class="container">
+            <div class="section">
+                <h:form>
 
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
-            <p:panel header="Exprime-toi" style="margin-bottom:10px;">
-                <h:panelGrid columns="1" cellpadding="5">
-                    <p:message for="beers"/>
-                    <p:message for="bars"/>                    
-                </h:panelGrid>
-                <h:panelGrid columns="4" cellpadding="5">
-                    <p:outputLabel value="J'ai bu une " />
-                    <p:selectOneMenu id="beers" value="#{postCtrl.post.idBi}" required="true">
-                        <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi}" itemLabel="#{bi.nomBi}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value=" à " />
-                    <p:selectOneMenu id="bars" value="#{postCtrl.post.idBa}" required="true">
-                        <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba}" itemLabel="#{ba.nomBa}"/>
-                    </p:selectOneMenu>                                        
-                </h:panelGrid>
+                    <p:panel header="Exprime-toi" style="margin-bottom:10px;">
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <p:message for="beers"/>
+                            <p:message for="bars"/>                    
+                        </h:panelGrid>
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <p:outputLabel value="J'ai bu une " />
+                            <p:selectOneMenu id="beers" value="#{postCtrl.idSelectedBeer}" required="true" 
+                                             requiredMessage="Merci de choisir une bière dans la liste déroulante">
+                                        <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.idBi}" itemLabel="#{bi.nomBi}"/>
+                                    </p:selectOneMenu>
+                            <p:outputLabel value=" à " />
+                            <p:selectOneMenu id="bars" value="#{postCtrl.idSelectedBar}" required="true"
+                                             requiredMessage="Merci de choisir un bar dans la liste déroulante">
+                                <f:selectItem itemLabel="Sélectionne un bar" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{barCtrl.allBars}" var="ba" itemValue="#{ba.idBa}" itemLabel="#{ba.nomBa}"/>
+                            </p:selectOneMenu>                                        
+                        </h:panelGrid>
 
-                <h:panelGrid columns="4" cellpadding="5">
-                    <p:outputLabel value="Je mets la note de " />
-                    <p:rating id="noteBiere" value="#{postCtrl.post.noteBiereP}" stars="10" required="true" />  
-                    <p:outputLabel value=" à cette bière." />
-                    <p:message for="noteBiere"/>                                        
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <p:outputLabel value="Je mets la note de " />
+                            <p:rating id="noteBiere" value="#{postCtrl.post.noteBiereP}" stars="10" required="true"
+                                      requiredMessage="Merci de noter la bière en cliquant sur les étoiles"/>  
+                            <p:outputLabel value=" à cette bière." />
+                            <p:message for="noteBiere"/>                                        
 
-                    <p:outputLabel value="Je mets la note de "/>
-                    <p:rating id="noteBar" value="#{postCtrl.post.noteBarP}" stars="10" required="true"/>  
-                    <p:outputLabel value=" à ce bar." />
-                    <p:message for="noteBar"/>                    
-                </h:panelGrid>
+                            <p:outputLabel value="Je mets la note de "/>
+                            <p:rating id="noteBar" value="#{postCtrl.post.noteBarP}" stars="10" required="true"
+                                      requiredMessage="Merci de noter le bar en cliquant sur les étoiles"/>  
+                            <p:outputLabel value=" à ce bar." />
+                            <p:message for="noteBar"/>                    
+                        </h:panelGrid>
 
-                <h:panelGrid columns="1" cellpadding="5">
-                    <p:outputLabel value="Ton avis sur cette dégustation : " />
-                    <p:inputTextarea id="com" value="#{postCtrl.post.commentP}" required="true" rows="5" cols="30" counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false" />                                        
-                    <h:outputText id="carac_restant" />
-                </h:panelGrid>                
-                <h:panelGrid columns="1" cellpadding="5">
-                    <p:message for="com"/>                                                            
-                </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <p:outputLabel value="Ton avis sur cette dégustation : " />
+                            <p:inputTextarea id="com" value="#{postCtrl.post.commentP}" required="true" rows="5" cols="30" 
+                                             counter="carac_restant" maxlength="200" counterTemplate="{0} caractères restants." autoResize="false"
+                                             requiredMessage="Merci de donner votre avis sur la dégustation"/>                                        
+                            <h:outputText id="carac_restant" />
+                        </h:panelGrid>                
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <p:message for="com"/>                                                            
+                        </h:panelGrid>
 
-                <p:separator />
-                <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
-                <p:separator />
-            </p:panel>
-        </h:form>
-        
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="5">
-                <p:outputLabel value="Tu ne trouves pas une bière ?" />
-                <p:commandButton value="+" type="button" onclick="PF('ajoutBiereDialog').show();"/>
+                        <p:separator />
+                        <p:commandButton id="addPost" value="Publier" actionListener="#{postCtrl.addPost(utilCtrl.util)}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
+                        <p:separator />
+                    </p:panel>
+                </h:form>
 
-                <p:outputLabel value="Tu ne trouves pas un bar ?" />
-                <p:commandButton value="+" type="button" onclick="PF('ajoutBarDialog').show();"/>
-            </h:panelGrid>
-            
-            <p:dialog widgetVar="ajoutBiereDialog" header="Ajout d'une bière" minHeight="40" resizable="false" closeOnEscape="true">
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="nomBi" value="Nom de la bière :" />
-                    <p:inputText id="nomBi" value="#{biereCtrl.biere.nomBi}" label="nomBi" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="nomBi"/>                   
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Tu ne trouves pas une bière ?" />
+                        <p:commandButton value="+" type="button" onclick="PF('ajoutBiereDialog').show();"/>
 
-                    <h:outputLabel for="pourcentBi" value="Pourcentage d'alcool :" />
-                    <p:inputText id="pourcentBi" value="#{biereCtrl.biere.pourcentBi}" label="pourcentBi" required="true">
-                         <f:validateDoubleRange minimum="1" maximum="30" />
-                    </p:inputText>                                       
-                    <p:message for="pourcentBi" /> 
+                        <p:outputLabel value="Tu ne trouves pas un bar ?" />
+                        <p:commandButton value="+" type="button" onclick="PF('ajoutBarDialog').show();"/>
+                    </h:panelGrid>
 
-                    <h:outputLabel for="typeBi" value="Type de bière : (à voir pour mettre un menu déroulant avec choix prédéfinis)" />
-                    <p:inputText id="typeBi" value="#{biereCtrl.biere.typeBi}" label="typeBi" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="typeBi" /> 
+                    <p:dialog widgetVar="ajoutBiereDialog" header="Ajout d'une bière" minHeight="40" resizable="false" closeOnEscape="true">
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <h:outputLabel for="nomBi" value="Nom de la bière :" />
+                            <p:inputText id="nomBi" value="#{biereCtrl.biere.nomBi}" label="nomBi" required="true"
+                                         requiredMessage="Merci de saisir un nom de bière">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="nomBi"/>                   
 
-                    <h:outputLabel for="paysBi" value="Pays de fabrication :" />
-                    <p:inputText id="paysBi" value="#{biereCtrl.biere.paysBi}" label="paysBi" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="paysBi" />                            
-                </h:panelGrid>
-                <p:separator/>
-                <p:commandButton id="addBeer" value="Ajouter" actionListener="#{biereCtrl.addBiere()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
-           </p:dialog>
-        </h:form>
-        
-        <h:form>
-            <p:dialog widgetVar="ajoutBarDialog" header="Ajout d'un bar" minHeight="40" resizable="false" closeOnEscape="true">
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="nomBa" value="Nom du bar :" />
-                    <p:inputText id="nomBa" value="#{barCtrl.bar.nomBa}" label="nomBa" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="nomBa"/>
-                    
-                    <h:outputLabel for="villeBa" value="Ville dans laquelle se trouve le bar :" />
-                    <p:inputText id="villeBa" value="#{barCtrl.bar.villeBa}" label="villeBa" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="villeBa"/>
-                    
-                    <h:outputLabel for="paysBa" value="Pays dans lequel se trouve le bar :" />
-                    <p:inputText id="paysBa" value="#{barCtrl.bar.paysBa}" label="paysBa" required="true">
-                         <f:validateLength minimum="4" maximum="20" />
-                    </p:inputText>                                       
-                    <p:message for="paysBa"/>                                                                  
-                </h:panelGrid>
-                <p:separator/>
-                <p:commandButton id="addBar" value="Ajouter" actionListener="#{barCtrl.addBar()}" ajax="false" icon="ui-icon-check" validateClient="true"/>
-            </p:dialog>                                   
-        </h:form>   
-<!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+                            <h:outputLabel for="pourcentBi" value="Pourcentage d'alcool :" />
+                            <p:inputText id="pourcentBi" value="#{biereCtrl.biere.pourcentBi}" label="pourcentBi" required="true"
+                                         requiredMessage="Merci de saisir le pourcentage d'alcool">
+                                <f:validateDoubleRange minimum="1" maximum="30" />
+                            </p:inputText>                                       
+                            <p:message for="pourcentBi" /> 
+
+                            <h:outputLabel for="typeBi" value="Type de bière : (à voir pour mettre un menu déroulant avec choix prédéfinis)" />
+                            <p:inputText id="typeBi" value="#{biereCtrl.biere.typeBi}" label="typeBi" required="true"
+                                         requiredMessage="Merci de saisir le type de la bière">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="typeBi" /> 
+
+                            <h:outputLabel for="paysBi" value="Pays de fabrication :" />
+                            <p:inputText id="paysBi" value="#{biereCtrl.biere.paysBi}" label="paysBi" required="true"
+                                         requiredMessage="Merci de saisir le pays de fabrication">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="paysBi" />                            
+                        </h:panelGrid>
+                        <p:separator/>
+                        <p:commandButton id="addBeer" value="Ajouter" actionListener="#{biereCtrl.addBiere()}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
+                    </p:dialog>
+                </h:form>
+
+                <h:form>
+                    <p:dialog widgetVar="ajoutBarDialog" header="Ajout d'un bar" minHeight="40" resizable="false" closeOnEscape="true">
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <h:outputLabel for="nomBa" value="Nom du bar :" />
+                            <p:inputText id="nomBa" value="#{barCtrl.bar.nomBa}" label="nomBa" required="true"
+                                         requiredMessage="Merci de saisir un nom de bar">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="nomBa"/>
+
+                            <h:outputLabel for="villeBa" value="Ville dans laquelle se trouve le bar :" />
+                            <p:inputText id="villeBa" value="#{barCtrl.bar.villeBa}" label="villeBa" required="true"
+                                         requiredMessage="Merci de saisir la ville dans laquelle se trouve le bar">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="villeBa"/>
+
+                            <h:outputLabel for="paysBa" value="Pays dans lequel se trouve le bar :" />
+                            <p:inputText id="paysBa" value="#{barCtrl.bar.paysBa}" label="paysBa" required="true"
+                                         requiredMessage="Merci de saisir le pays dans lequel se trouve le bar">
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>                                       
+                            <p:message for="paysBa"/>                                                                  
+                        </h:panelGrid>
+                        <p:separator/>
+                        <p:commandButton id="addBar" value="Ajouter" actionListener="#{barCtrl.addBar()}" ajax="false"
+                                         icon="ui-icon-check" validateClient="true"/>
+                    </p:dialog>                                   
+                </h:form>   
+
+            </div>
+        </div>
+        <!--  Scripts-->
+        <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
         <script src="JS/materialize.js"></script>
         <script src="JS/init.js"></script>     
     </h:body>
