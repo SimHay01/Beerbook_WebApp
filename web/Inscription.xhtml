@@ -26,12 +26,12 @@
 
         <div class="container">
             <div class="section">
-                <p:outputLabel value="#{utilCtrl.util.pseudoU}"/>
+                <p:outputLabel value="#{utilCtrl.util.pseudoU}" style="font-size: 20px"/>
                 <h:form enctype="multipart/form-data">
                     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                     <p:panel header="Inscription">
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="pseudo" value="Pseudo :" />
+                            <h:outputLabel for="pseudo" value="Pseudo :" style="font-size: 20px"/>
                             <p:inputText id="pseudo" value="#{utilCtrl.util.pseudoU}" label="Pseudo" required="true"
                                          requiredMessage="Merci de saisir un pseudo">
                                 <f:validateLength minimum="4" maximum="20" />
@@ -40,18 +40,18 @@
                         </h:panelGrid>                    
 
                         <h:panelGrid columns="2">
-                            <h:outputLabel for="pp" value="Photo de profil :" />                    
+                            <h:outputLabel for="pp" value="Photo de profil :" style="font-size: 20px"/>                    
                             <p:fileUpload required="false" value="#{utilCtrl.file}" mode="simple" dragDropSupport="true"
                                           update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         </h:panelGrid>
 
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="mdp1" value="Mot de passe :" />
+                            <h:outputLabel for="mdp1" value="Mot de passe :" style="font-size: 20px" />
                             <p:password id="mdp1" value="#{utilCtrl.util.mdpU}" match="mdp2" label="Mot de passe" required="true"
                                         requiredMessage="Merci de saisir un mot de passe"/>
                             <p:message for="mdp1" />
 
-                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : " style="font-size: 20px"/>
                             <p:password id="mdp2" value="#{utilCtrl.util.mdpU}" label="Confirmation mot de passe" required="true"
                                         requiredMessage="Merci de répéter le mot de passe"/>
                             <p:message for="mdp2" />

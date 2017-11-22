@@ -20,17 +20,19 @@
 
         <div class="container">
             <div class="section">
-                <h:outputLabel value="Ton pseudo est : #{utilCtrl.util.pseudoU}" style="color: black" />
+                <div class="center">
+                    <h:outputLabel value="Ton pseudo est : #{utilCtrl.util.pseudoU}" style="color: black; font-size: 20px;" />
+                </div>
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <p:panel header="Voici ton profil" style="margin-bottom:10px;">
                     <h:form>
                         <h:panelGrid columns="1" cellpadding="5">
-                            <p:outputLabel value="Modifier photo ici" />
+                            <p:outputLabel value="Modifier photo ici" style="font-size: 20px" />
                         </h:panelGrid>
                         <p:separator />
 
                         <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel id="pseudo" value="Modifie ton pseudo : " />
+                            <p:outputLabel id="pseudo" value="Modifie ton pseudo : " style="font-size: 20px"/>
                             <p:inputText value="#{utilCtrl.inputPseudo}">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>
@@ -41,11 +43,11 @@
                     </h:form>
                     <h:form>
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="mdp1" value="Mot de passe :" />
+                            <h:outputLabel for="mdp1" value="Mot de passe :" style="font-size: 20px"/>
                             <p:password id="mdp1" value="#{utilCtrl.inputMdp}" match="mdp2" label="Mot de passe" required="true" />
                             <p:message for="mdp1" />
 
-                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : " style="font-size: 20px"/>
                             <p:password id="mdp2" value="#{utilCtrl.inputMdp}" label="Confirmation mot de passe" required="true" />
                             <p:message for="mdp2" />
                         </h:panelGrid>
