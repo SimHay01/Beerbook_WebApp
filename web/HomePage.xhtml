@@ -93,13 +93,18 @@
 
 
         <!-- Ring part -->
-        <h:form>
-            <p:ring id="basic" value="#{ring.bieres}" var="bi" styleClass="image-ring" easing="easeInOutBack">
-                <p:graphicImage url="Images/#{bi}.png" width="20px" />
-            </p:ring>
-        </h:form>
-
-
+        <div class="container">
+            <div class="section">
+                <h:form>
+                    <p:contentFlow id="basic" value="#{ring.bieres}" var="bi" styleClass="image-ring" >
+                        <p:graphicImage url="Images/#{bi}" width="20px" styleClass="content"/>
+                        <div class="caption">#{bi}</div>
+                    </p:contentFlow>
+                </h:form>
+            </div>
+        </div>
+        
+        
         <!-- Accompagnement -->
         <div id="index-banner" class="parallax-container">
             <div class="section no-pad-bot">

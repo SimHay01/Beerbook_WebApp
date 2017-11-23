@@ -58,7 +58,7 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     public void upload(Utilisateur connectedUser) throws IOException {
             if(file != null) {              
                 InputStream input = file.getInputstream();
-                Path folder = Paths.get("/Users/severinlhommelet/jeeProject/Facetagram/Facetagram/web/res/img");
+                Path folder = Paths.get("/home/carlito/git/JEE/Beerbook_WebApp/web/Images");
                 String filename = FilenameUtils.getBaseName(file.getFileName()); 
                 String extension = FilenameUtils.getExtension(file.getFileName());
                 Path file2 = Files.createTempFile(folder, filename + "-", "." + extension);
