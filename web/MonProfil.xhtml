@@ -25,13 +25,13 @@
                 </div>
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <p:panel header="Voici ton profil" style="margin-bottom:10px;">
-                    <h:form>
+                    <h:form enctype="multipart/form-data">
                         <h:panelGrid columns="2" cellpadding="5">
                             <p:graphicImage value="PhotosProfil/#{utilCtrl.util.photoU}" width="200px" class="circle"/>
-                            <p:fileUpload required="false" value="#{utilCtrl.newPp}" mode="simple" dragDropSupport="true"
-                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            <p:fileUpload required="false" value="#{utilCtrl.uploadedFile}" mode="simple" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                         </h:panelGrid>
-                        <p:commandButton id="updatePp" value="Mets à jour ta photo de profil" actionListener="#{utilCtrl.updatePp()}" ajax="false" icon="ui-icon-check" validateClient="true"/>                        
+                        <p:commandButton id="updatePp" value="Mets à jour ta photo de profil" action="#{utilCtrl.updatePp()}" ajax="false" icon="ui-icon-check" validateClient="true"/>                        
                         <p:separator />
                     </h:form>
                     <h:form>

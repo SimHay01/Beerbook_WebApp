@@ -13,9 +13,11 @@
     </h:head>
     <h:body>
         <!-- Header part -->
-        <nav class="blue-grey lighten-2" role="navigation">
+        <nav class="blue-grey lighten-2" role="navigation">           
             <div class="nav-wrapper container">
-                <a id="logo-container" class="brand-logo">BEER - BOOK</a>
+                <a id="logo-container" class="brand-logo">
+                    BEERBOOK
+                </a>                                
                 <ul class="right hide-on-med-and-down"></ul>
             </div>
         </nav>
@@ -25,9 +27,9 @@
             <div class="section no-pad-bot">
                 <div class="container">
                     <br></br>
-                    <h1 class="header center teal-text text-lighten-2">BEER - BOOK</h1>
+                    <h1 class="header center teal-text text-lighten-2">BEERBOOK</h1>
                     <div class="row center">
-                        <h5 class="header col s12 white-text">L'ENCYCLOPÉDIE DE MES BIÈRES PRÉFÉRÉES </h5>
+                        <h5 class="header col s12 white-text">LE RÉSEAU SOCIAL QUI RELIE LES AMATEURS DE BIÈRE ENTRE EUX</h5>
                     </div>
                     <div class="row center">
                         <h:form style="text-align: center;">
@@ -39,7 +41,7 @@
                                         <div class="col s6 push-s3">
                                             <p:inputText value="#{utilCtrl.inputPseudo}" class="centered" 
                                                          style="text-align: center; color: white; font-size: 30px;
-                                                         margin-bottom: 4px;" title="Saisissez votre pseudo ici" /> <br></br>
+                                                         margin-bottom: 4px;" title="Saisissez votre pseudo ici"/> <br></br>
                                             <p:password value="#{utilCtrl.inputMdp}" style="text-align: center; color: white; font-size: 30px;
                                                         margin-bottom: 4px;" title="Saisissez votre mot de passe ici"
                                                         class=""/> <br></br>
@@ -115,7 +117,7 @@
             <div class="section">
                 <div class="row">
                     <h:panelGrid columns="1" cellpadding="5" style="text-align: center" class="col s12 centered">
-                        <p:commandButton value="Qui sont les auteurs de ce site sublime ?" 
+                        <p:commandButton value="Qui sont les auteurs cette sublime application web ?" 
                                          class="btn-large waves-effect waves-light teal lighten" onclick="PF('dialog').show();"/>
                     </h:panelGrid>
                     <p:dialog widgetVar="dialog" minHeight="40" resizable="false" closeOnEscape="true">

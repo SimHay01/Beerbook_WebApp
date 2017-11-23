@@ -20,6 +20,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServlet;
 import org.primefaces.model.UploadedFile;
 import org.apache.commons.io.FilenameUtils;
+import tools.Upload;
 
 /**
  *
@@ -33,12 +34,13 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     private UtilisateurDAO daoUtil;
     private Utilisateur util;
 
-    private String inputPseudo;
-    private String inputMdp;
+    private String inputPseudo, inputMdp;
+    private final String photosProfilDirectory = "PhotosProfil";
 
     private UploadedFile uploadedFile;
     private UploadedFile newPp;
-    private Path file;
+
+    private Upload uploadBean;
 
     /**
      * Creates a new instance of BiereCtrl
@@ -48,46 +50,26 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     }
 
     public void addUtil() throws IOException {
-        this.upload();
-        if (uploadedFile != null) {
-            this.util.setPhotoU(this.getFile().getFileName().toString());
+        if (checkPseudo()) {
+            uploadBean = new Upload();
+            uploadBean.upload(uploadedFile, photosProfilDirectory);
+            if (uploadedFile != null) {
+                this.util.setPhotoU(uploadBean.getFile().getFileName().toString());
+            } else {
+                this.util.setPhotoU("default.png");
+            }
+            this.util.setPseudoU(inputPseudo);
+            daoUtil.add(this.util);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
+            inputPseudo = "";
+            this.util = new Utilisateur();
         } else {
-            this.util.setPhotoU("default.png");
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erreur - ", "Pseudo indisponible"));
+            inputPseudo = "";            
         }
-        daoUtil.add(this.util);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
-        this.util = new Utilisateur();
     }
-
-    public void upload() throws IOException {
-        if (uploadedFile != null) {
-            InputStream input = uploadedFile.getInputstream();
-            Path folder = Paths.get("C:/workspace/Dernier_code/Beerbook_WebApp/web/PhotosProfil");
-            String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
-            String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
-            file = Files.createTempFile(folder, filename + "-", "." + extension);
-            try (InputStream input2 = uploadedFile.getInputstream()) {
-                Files.copy(input2, file, StandardCopyOption.REPLACE_EXISTING);
-            }            
-            file = Paths.get(file.toString());            
-        }
-        //return null;
-    }
-    
-    public void uploadNewPp() throws IOException {
-        if (newPp != null) {
-            InputStream input = newPp.getInputstream();
-            Path folder = Paths.get("C:/workspace/Dernier_code/Beerbook_WebApp/web/PhotosProfil");
-            String filename = FilenameUtils.getBaseName(newPp.getFileName());
-            String extension = FilenameUtils.getExtension(newPp.getFileName());
-            file = Files.createTempFile(folder, filename + "-", "." + extension);
-            try (InputStream input2 = newPp.getInputstream()) {
-                Files.copy(input2, file, StandardCopyOption.REPLACE_EXISTING);
-            }            
-            file = Paths.get(file.toString());            
-        }
-        //return null;
-    }    
 
     public void updatePseudo() {
         if (checkPseudo()) {
@@ -108,17 +90,19 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         util.setMdpU(inputMdp);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Ton mot de passe a été modifié."));
     }
-    
+
     public void updatePp() throws IOException {
-        //this.uploadNewPp();
-//        if (newPp != null) {
-//            daoUtil.updatePp(newPp.toString(), util.getIdU());
-//        } else {
-//            daoUtil.updatePp("default.png", util.getIdU());
-//        }                
-//        util.setPhotoU(this.getFile().getFileName().toString());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, newPp.toString() + "!", "Ta nouvelle photo a été modifiée."));
-    }    
+        uploadBean = new Upload();
+        uploadBean.upload(uploadedFile, photosProfilDirectory);
+        if (uploadedFile != null) {
+            this.util.setPhotoU(uploadBean.getFile().getFileName().toString());
+        } else {
+            this.util.setPhotoU("default.png");
+        }
+        daoUtil.updatePp(uploadBean.getFile().getFileName().toString(), util.getIdU());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sympa !", "Ta nouvelle photo a été modifiée."));
+        //return "MonProfil.xhtml?faces-redirect=true";
+    }
 
     public String checkConnexion() {
         if (daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size() == 1) {
@@ -128,16 +112,13 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue !", "Vous êtes connecté"));
             return "Menu";
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Pseudo ou mot de passe incorrect(s)."));
         }
         return null;
     }
 
     public boolean checkPseudo() {
         if (!daoUtil.checkPseudo(getInputPseudo()).isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Erreur - ", "Pseudo indisponible"));
             daoUtil.checkPseudo(getInputPseudo()).clear();
             return (false);
         } else {
@@ -154,14 +135,6 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         this.util = new Utilisateur();
         return "HomePage.xhtml?faces-redirect=true";
     }
-        
-    public Path getFile() {
-        return file;
-    }
-
-    public void setFile(Path file) {
-        this.file = file;
-    }
 
     public UploadedFile getNewPp() {
         return newPp;
@@ -170,9 +143,6 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     public void setNewPp(UploadedFile newPp) {
         this.newPp = newPp;
     }
-    
-    
-        
 
     public UploadedFile getUploadedFile() {
         return uploadedFile;

@@ -80,7 +80,7 @@ and open the template in the editor.
                     </p:panel>
                 </h:form>
 
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Tu ne trouves pas une bière ?" />
                         <p:commandButton value="+" type="button" onclick="PF('ajoutBiereDialog').show();"/>
@@ -106,20 +106,22 @@ and open the template in the editor.
                             <p:message for="pourcentBi" /> 
 
                             <h:outputLabel for="typeBi" value="Type de bière : " style="font-size: 20px"/>
-                            <p:selectOneMenu id="typeBi" value="#{biereCtrl.biere.typeBi}" required="true"
-                                             requiredMessage="Merci de choisir un bar dans la liste déroulante">
-                                <f:selectItem itemLabel="Sélectionne un type" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{biereCtrl.allTypes}" var="ba" itemValue="#{bi.typeBi}" itemLabel="#{bi.typeBi}"/>
-                            </p:selectOneMenu>                               
-                            
-                            <br></br>
+                            <p:inputText id="typeBi" value="#{biereCtrl.biere.typeBi}" label="typeBi" required="true"
+                                         requiredMessage="Merci de saisir le type de bière">
+                                <f:validateLength minimum="2" maximum="20" />
+                            </p:inputText>
+                            <p:message for="pourcentBi" />                            
 
                             <h:outputLabel for="paysBi" value="Pays de fabrication :" style="font-size: 20px"/>
                             <p:inputText id="paysBi" value="#{biereCtrl.biere.paysBi}" label="paysBi" required="true"
                                          requiredMessage="Merci de saisir le pays de fabrication">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>                                       
-                            <p:message for="paysBi" />                            
+                            <p:message for="paysBi" />
+
+                            <h:outputLabel for="photoBi" value="Photo :" style="font-size: 20px"/>
+                            <p:fileUpload required="false" value="#{biereCtrl.uploadedFile}" mode="simple" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         </h:panelGrid>
                         <p:separator/>
                         <p:commandButton id="addBeer" value="Ajouter" actionListener="#{biereCtrl.addBiere()}" ajax="false"

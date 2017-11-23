@@ -58,7 +58,7 @@ public class Biere implements Serializable {
     @Size(max = 25)
     @Column(name = "paysBi")
     private String paysBi;
-    @Size(max = 25)
+    @Size(max = 50)
     @Column(name = "photoBi")
     private String photoBi;
 
