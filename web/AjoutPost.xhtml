@@ -37,9 +37,9 @@ and open the template in the editor.
                             <p:outputLabel value="J'ai bu une " />
                             <p:selectOneMenu id="beers" value="#{postCtrl.idSelectedBeer}" required="true" 
                                              requiredMessage="Merci de choisir une bière dans la liste déroulante">
-                                        <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
-                                        <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.idBi}" itemLabel="#{bi.nomBi}"/>
-                                    </p:selectOneMenu>
+                                <f:selectItem itemLabel="Sélectionne une bière" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{biereCtrl.allBeers}" var="bi" itemValue="#{bi.idBi}" itemLabel="#{bi.nomBi}"/>
+                            </p:selectOneMenu>
                             <p:outputLabel value=" à " />
                             <p:selectOneMenu id="bars" value="#{postCtrl.idSelectedBar}" required="true"
                                              requiredMessage="Merci de choisir un bar dans la liste déroulante">
@@ -105,12 +105,14 @@ and open the template in the editor.
                             </p:inputText>                                       
                             <p:message for="pourcentBi" /> 
 
-                            <h:outputLabel for="typeBi" value="Type de bière : (à voir pour mettre un menu déroulant avec choix prédéfinis)" style="font-size: 20px"/>
-                            <p:inputText id="typeBi" value="#{biereCtrl.biere.typeBi}" label="typeBi" required="true"
-                                         requiredMessage="Merci de saisir le type de la bière">
-                                <f:validateLength minimum="4" maximum="20" />
-                            </p:inputText>                                       
-                            <p:message for="typeBi" /> 
+                            <h:outputLabel for="typeBi" value="Type de bière : " style="font-size: 20px"/>
+                            <p:selectOneMenu id="typeBi" value="#{biereCtrl.biere.typeBi}" required="true"
+                                             requiredMessage="Merci de choisir un bar dans la liste déroulante">
+                                <f:selectItem itemLabel="Sélectionne un type" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{biereCtrl.allTypes}" var="ba" itemValue="#{bi.typeBi}" itemLabel="#{bi.typeBi}"/>
+                            </p:selectOneMenu>                               
+                            
+                            <br></br>
 
                             <h:outputLabel for="paysBi" value="Pays de fabrication :" style="font-size: 20px"/>
                             <p:inputText id="paysBi" value="#{biereCtrl.biere.paysBi}" label="paysBi" required="true"
