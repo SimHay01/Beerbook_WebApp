@@ -9,14 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.tagcloud.DefaultTagCloudItem;
-import org.primefaces.model.tagcloud.DefaultTagCloudModel;
-import org.primefaces.model.tagcloud.TagCloudItem;
-import org.primefaces.model.tagcloud.TagCloudModel;
 
 /**
  *
@@ -29,7 +22,7 @@ public class Ring implements Serializable {
 
     @PostConstruct
     public void init() {
-        bieres = new ArrayList<String>();
+        bieres = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             bieres.add("biere" + i + ".png");
         }

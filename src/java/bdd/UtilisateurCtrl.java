@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServlet;
 import org.primefaces.model.UploadedFile;
 import org.apache.commons.io.FilenameUtils;
 
-
 /**
  *
  * @author Simon Hay
@@ -37,6 +36,7 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     private String inputPseudo;
     private String inputMdp;
     private UploadedFile file;
+
     /**
      * Creates a new instance of BiereCtrl
      */
@@ -54,23 +54,23 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
         this.util = new Utilisateur();
     }
-    
-    public void upload(Utilisateur connectedUser) throws IOException {
-            if(file != null) {              
-                InputStream input = file.getInputstream();
-                Path folder = Paths.get("/home/carlito/git/JEE/Beerbook_WebApp/web/Images");
-                String filename = FilenameUtils.getBaseName(file.getFileName()); 
-                String extension = FilenameUtils.getExtension(file.getFileName());
-                Path file2 = Files.createTempFile(folder, filename + "-", "." + extension);
-                try (InputStream input2 = file.getInputstream()) {
-                    Files.copy(input2, file2, StandardCopyOption.REPLACE_EXISTING);
 
-                    String filename2 = FilenameUtils.getBaseName(file.getFileName()); 
-                    String extension2 = FilenameUtils.getExtension(file.getFileName());
-                    file = null;
-                }
+    public void upload(Utilisateur connectedUser) throws IOException {
+        if (file != null) {
+            InputStream input = file.getInputstream();
+            Path folder = Paths.get("/home/carlito/git/JEE/Beerbook_WebApp/web/Images");
+            String filename = FilenameUtils.getBaseName(file.getFileName());
+            String extension = FilenameUtils.getExtension(file.getFileName());
+            Path file2 = Files.createTempFile(folder, filename + "-", "." + extension);
+            try (InputStream input2 = file.getInputstream()) {
+                Files.copy(input2, file2, StandardCopyOption.REPLACE_EXISTING);
+
+                String filename2 = FilenameUtils.getBaseName(file.getFileName());
+                String extension2 = FilenameUtils.getExtension(file.getFileName());
+                file = null;
             }
-        }    
+        }
+    }
 
     public void updatePseudo() {
         daoUtil.updatePseudo(inputPseudo, util.getIdU());
