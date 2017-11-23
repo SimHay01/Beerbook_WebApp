@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServlet;
 import org.primefaces.model.UploadedFile;
 import org.apache.commons.io.FilenameUtils;
 
-
 /**
  *
  * @author Simon Hay
@@ -36,7 +35,10 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
 
     private String inputPseudo;
     private String inputMdp;
-    private UploadedFile file;
+    private UploadedFile uploadedFile;
+    private UploadedFile newPp;
+    private Path file;
+
     /**
      * Creates a new instance of BiereCtrl
      */
@@ -44,9 +46,10 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         this.util = new Utilisateur();
     }
 
-    public void addUtil() {
-        if (file != null) {
-            this.util.setPhotoU(file.getFileName());
+    public void addUtil() throws IOException {
+        this.upload();
+        if (uploadedFile != null) {
+            this.util.setPhotoU(this.getFile().getFileName().toString());
         } else {
             this.util.setPhotoU("default.png");
         }
@@ -54,23 +57,36 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
         this.util = new Utilisateur();
     }
-    
-    public void upload(Utilisateur connectedUser) throws IOException {
-            if(file != null) {              
-                InputStream input = file.getInputstream();
-                Path folder = Paths.get("/Users/severinlhommelet/jeeProject/Facetagram/Facetagram/web/res/img");
-                String filename = FilenameUtils.getBaseName(file.getFileName()); 
-                String extension = FilenameUtils.getExtension(file.getFileName());
-                Path file2 = Files.createTempFile(folder, filename + "-", "." + extension);
-                try (InputStream input2 = file.getInputstream()) {
-                    Files.copy(input2, file2, StandardCopyOption.REPLACE_EXISTING);
 
-                    String filename2 = FilenameUtils.getBaseName(file.getFileName()); 
-                    String extension2 = FilenameUtils.getExtension(file.getFileName());
-                    file = null;
-                }
-            }
-        }    
+    public void upload() throws IOException {
+        if (uploadedFile != null) {
+            InputStream input = uploadedFile.getInputstream();
+            Path folder = Paths.get("C:/workspace/Dernier_code/Beerbook_WebApp/web/PhotosProfil");
+            String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
+            String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
+            file = Files.createTempFile(folder, filename + "-", "." + extension);
+            try (InputStream input2 = uploadedFile.getInputstream()) {
+                Files.copy(input2, file, StandardCopyOption.REPLACE_EXISTING);
+            }            
+            file = Paths.get(file.toString());            
+        }
+        //return null;
+    }
+    
+    public void uploadNewPp() throws IOException {
+        if (newPp != null) {
+            InputStream input = newPp.getInputstream();
+            Path folder = Paths.get("C:/workspace/Dernier_code/Beerbook_WebApp/web/PhotosProfil");
+            String filename = FilenameUtils.getBaseName(newPp.getFileName());
+            String extension = FilenameUtils.getExtension(newPp.getFileName());
+            file = Files.createTempFile(folder, filename + "-", "." + extension);
+            try (InputStream input2 = newPp.getInputstream()) {
+                Files.copy(input2, file, StandardCopyOption.REPLACE_EXISTING);
+            }            
+            file = Paths.get(file.toString());            
+        }
+        //return null;
+    }    
 
     public void updatePseudo() {
         daoUtil.updatePseudo(inputPseudo, util.getIdU());
@@ -84,6 +100,17 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         util.setMdpU(inputMdp);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Ton mot de passe a été modifié."));
     }
+    
+    public void updatePp() throws IOException {
+        //this.uploadNewPp();
+//        if (newPp != null) {
+//            daoUtil.updatePp(newPp.toString(), util.getIdU());
+//        } else {
+//            daoUtil.updatePp("default.png", util.getIdU());
+//        }                
+//        util.setPhotoU(this.getFile().getFileName().toString());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, newPp.toString() + "!", "Ta nouvelle photo a été modifiée."));
+    }    
 
     public String checkConnexion() {
         if (daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size() == 1) {
@@ -103,13 +130,32 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
         this.util = new Utilisateur();
         return "HomePage.xhtml?faces-redirect=true";
     }
-
-    public UploadedFile getFile() {
+        
+    public Path getFile() {
         return file;
     }
 
-    public void setFile(UploadedFile file) {
+    public void setFile(Path file) {
         this.file = file;
+    }
+
+    public UploadedFile getNewPp() {
+        return newPp;
+    }
+
+    public void setNewPp(UploadedFile newPp) {
+        this.newPp = newPp;
+    }
+    
+    
+        
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 
     public void setInputPseudo(String inputPseudo) {

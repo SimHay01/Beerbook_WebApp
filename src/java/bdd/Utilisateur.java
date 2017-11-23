@@ -6,6 +6,7 @@
 package bdd;
 
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -47,10 +48,10 @@ public class Utilisateur implements Serializable {
     @Size(max = 25)
     @Column(name = "pseudoU")
     private String pseudoU;
-    @Size(max = 25)
+    @Size(max = 50)
     @Column(name = "photoU")
     private String photoU;
-    @Size(max = 25)
+    @Size(max = 50)
     @Column(name = "mdpU")
     private String mdpU;
     @OneToMany(mappedBy = "idU")

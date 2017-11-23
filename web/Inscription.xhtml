@@ -41,7 +41,7 @@
 
                         <h:panelGrid columns="2">
                             <h:outputLabel for="pp" value="Photo de profil :" style="font-size: 20px"/>                    
-                            <p:fileUpload required="false" value="#{utilCtrl.file}" mode="simple" dragDropSupport="true"
+                            <p:fileUpload required="false" value="#{utilCtrl.uploadedFile}" mode="simple" dragDropSupport="true"
                                           update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         </h:panelGrid>
 

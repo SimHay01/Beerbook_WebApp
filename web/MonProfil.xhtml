@@ -26,11 +26,15 @@
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <p:panel header="Voici ton profil" style="margin-bottom:10px;">
                     <h:form>
-                        <h:panelGrid columns="1" cellpadding="5">
-                            <p:outputLabel value="Modifier photo ici" style="font-size: 20px" />
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:graphicImage value="PhotosProfil/#{utilCtrl.util.photoU}" width="200px" class="circle"/>
+                            <p:fileUpload required="false" value="#{utilCtrl.newPp}" mode="simple" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         </h:panelGrid>
+                        <p:commandButton id="updatePp" value="Mets à jour ta photo de profil" actionListener="#{utilCtrl.updatePp()}" ajax="false" icon="ui-icon-check" validateClient="true"/>                        
                         <p:separator />
-
+                    </h:form>
+                    <h:form>
                         <h:panelGrid columns="3" cellpadding="5">
                             <p:outputLabel id="pseudo" value="Modifie ton pseudo : " style="font-size: 20px"/>
                             <p:inputText value="#{utilCtrl.inputPseudo}">

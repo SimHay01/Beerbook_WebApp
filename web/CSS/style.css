@@ -11,6 +11,11 @@
     font-size: 20px;
 }
 
+.ui-widget input{
+    font-family: 'MedievalSharp', cursive;
+}
+
+
 .ui-button{
     font-family: 'MedievalSharp', cursive;    
 }
