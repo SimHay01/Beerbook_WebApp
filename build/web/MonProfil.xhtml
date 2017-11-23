@@ -8,6 +8,7 @@
     <h:head>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet"/>
         <link href="CSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <title>Mon profil</title>
@@ -19,17 +20,23 @@
 
         <div class="container">
             <div class="section">
-                <h:outputLabel value="Ton pseudo est : #{utilCtrl.util.pseudoU}" style="color: black" />
+                <div class="center">
+                    <h:outputLabel value="Ton pseudo est : #{utilCtrl.util.pseudoU}" style="color: black; font-size: 20px;" />
+                </div>
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <p:panel header="Voici ton profil" style="margin-bottom:10px;">
                     <h:form>
-                        <h:panelGrid columns="1" cellpadding="5">
-                            <p:outputLabel value="Modifier photo ici" />
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:graphicImage value="PhotosProfil/#{utilCtrl.util.photoU}" width="200px" class="circle"/>
+                            <p:fileUpload required="false" value="#{utilCtrl.newPp}" mode="simple" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         </h:panelGrid>
+                        <p:commandButton id="updatePp" value="Mets à jour ta photo de profil" actionListener="#{utilCtrl.updatePp()}" ajax="false" icon="ui-icon-check" validateClient="true"/>                        
                         <p:separator />
-
+                    </h:form>
+                    <h:form>
                         <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel id="pseudo" value="Modifie ton pseudo : " />
+                            <p:outputLabel id="pseudo" value="Modifie ton pseudo : " style="font-size: 20px"/>
                             <p:inputText value="#{utilCtrl.inputPseudo}">
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>
@@ -40,11 +47,11 @@
                     </h:form>
                     <h:form>
                         <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="mdp1" value="Mot de passe :" />
+                            <h:outputLabel for="mdp1" value="Mot de passe :" style="font-size: 20px"/>
                             <p:password id="mdp1" value="#{utilCtrl.inputMdp}" match="mdp2" label="Mot de passe" required="true" />
                             <p:message for="mdp1" />
 
-                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : "/>
+                            <h:outputLabel for="mdp2" value="Répétez le mot de passe : " style="font-size: 20px"/>
                             <p:password id="mdp2" value="#{utilCtrl.inputMdp}" label="Confirmation mot de passe" required="true" />
                             <p:message for="mdp2" />
                         </h:panelGrid>

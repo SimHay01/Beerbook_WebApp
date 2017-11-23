@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import java.util.List;
-import java.util.Locale;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
