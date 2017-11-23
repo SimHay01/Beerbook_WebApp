@@ -45,14 +45,21 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     }
 
     public void addUtil() {
-        if (file != null) {
-            this.util.setPhotoU(file.getFileName());
+        if (checkPseudo()) {
+            if (file != null) {
+                this.util.setPhotoU(file.getFileName());
+            } else {
+                this.util.setPhotoU("default.png");
+            }
+            this.util.setPseudoU(inputPseudo);
+            daoUtil.add(this.util);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Bienvenue :-) !"));
+            this.util = new Utilisateur();
         } else {
-            this.util.setPhotoU("default.png");
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Merci d'essayer un autre pseudo !"));
         }
-        daoUtil.add(this.util);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU() + " !", "Bienvenue :-) !"));
-        this.util = new Utilisateur();
     }
 
     public void upload(Utilisateur connectedUser) throws IOException {
@@ -73,10 +80,17 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
     }
 
     public void updatePseudo() {
-        daoUtil.updatePseudo(inputPseudo, util.getIdU());
-        util.setPseudoU(inputPseudo);
-        setInputPseudo("");
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Sympa comme nouveau pseudo !"));
+        if (checkPseudo()) {
+            daoUtil.updatePseudo(inputPseudo, util.getIdU());
+            util.setPseudoU(inputPseudo);
+            setInputPseudo("");
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, util.getPseudoU(), "Sympa comme nouveau pseudo !"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Merci d'essayer un autre pseudo !"));
+        }
+
     }
 
     public void updateMdp() {
@@ -96,6 +110,22 @@ public class UtilisateurCtrl extends HttpServlet implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur" + daoUtil.checkConnexion(getInputPseudo(), getInputMdp()).size(), "Pseudo ou mot de passe incorrect(s)."));
         }
         return null;
+    }
+
+    public boolean checkPseudo() {
+        if (!daoUtil.checkPseudo(getInputPseudo()).isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erreur - ", "Pseudo indisponible"));
+            daoUtil.checkPseudo(getInputPseudo()).clear();
+            return (false);
+        } else {
+            // else does not exist so we can add it
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "", "Pseudo disponible"));
+            return (true);
+        }
     }
 
     public String logout() {

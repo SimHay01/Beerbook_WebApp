@@ -49,7 +49,15 @@ public class UtilisateurDAO {
                 .setParameter("newMdp", newMdp)
                 .setParameter("idConnectedUser", idConnectedUser);
         queryUpdateMdp.executeUpdate();
-    }     
+    } 
+
+    public List<String> checkPseudo(String inputPseudo){
+        Query query;
+        query = em.createQuery(
+                "SELECT u.pseudoU FROM Utilisateur u WHERE u.pseudoU = :inputPseudoParam")
+                .setParameter("inputPseudoParam", inputPseudo);
+        return query.getResultList();
+    }
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
